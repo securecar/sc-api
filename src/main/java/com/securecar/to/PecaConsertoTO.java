@@ -1,13 +1,13 @@
 package com.securecar.to;
 
-public class PecasConsertoTO {
+public class PecaConsertoTO {
     private Long idPeca;
     private double valorPeca;
     private String descPeca;
     private int quantidadePeca;
     private Long idConserto;
 
-    public PecasConsertoTO() {
+    public PecaConsertoTO() {
     }
 
     public Long getIdPeca() {

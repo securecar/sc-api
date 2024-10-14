@@ -38,7 +38,7 @@ public class UsuarioDAO extends Repository {
         return usuarios;
     }
 
-    public UsuarioTO findById(@PathParam("id") Long id){
+    public UsuarioTO findById(Long id){
         UsuarioTO usuario = new UsuarioTO();
         String sql = "select * from T_SECURECAR_USUARIO where ID_USUARIO = ?";
         try (PreparedStatement ps = getConnection().prepareStatement(sql)){
