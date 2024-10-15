@@ -1,45 +1,19 @@
 package com.securecar.to;
 
 public class PecaConsertoTO {
-    private Long idPeca;
-    private double valorPeca;
-    private String descPeca;
-    private int quantidadePeca;
+    private Long idPecaConserto;
     private Long idConserto;
+    private Long idPeca;
 
     public PecaConsertoTO() {
     }
 
-    public Long getIdPeca() {
-        return idPeca;
+    public Long getIdPecaConserto() {
+        return idPecaConserto;
     }
 
-    public void setIdPeca(Long idPeca) {
-        this.idPeca = idPeca;
-    }
-
-    public double getValorPeca() {
-        return valorPeca;
-    }
-
-    public void setValorPeca(double valorPeca) {
-        this.valorPeca = valorPeca;
-    }
-
-    public String getDescPeca() {
-        return descPeca;
-    }
-
-    public void setDescPeca(String descPeca) {
-        this.descPeca = descPeca;
-    }
-
-    public int getQuantidadePeca() {
-        return quantidadePeca;
-    }
-
-    public void setQuantidadePeca(int quantidadePeca) {
-        this.quantidadePeca = quantidadePeca;
+    public void setIdPecaConserto(Long idPecaConserto) {
+        this.idPecaConserto = idPecaConserto;
     }
 
     public Long getIdConserto() {
@@ -48,5 +22,13 @@ public class PecaConsertoTO {
 
     public void setIdConserto(Long idConserto) {
         this.idConserto = idConserto;
+    }
+
+    public Long getIdPeca() {
+        return idPeca;
+    }
+
+    public void setIdPeca(Long idPeca) {
+        this.idPeca = idPeca;
     }
 }
