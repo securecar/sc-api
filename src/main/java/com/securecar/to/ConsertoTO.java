@@ -1,12 +1,22 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.time.LocalDate;
 
 public class ConsertoTO {
     private Long idConserto;
+    @FutureOrPresent
     private LocalDate dataConserto;
+    @NotBlank
     private String descricaoConserto;
+    @NotNull
+    @Positive
     private double valorConserto;
+    @NotNull
     private Long idIncidente;
 
     public ConsertoTO() {

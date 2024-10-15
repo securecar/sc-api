@@ -1,9 +1,15 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.*;
+
 public class PecaTO {
     private Long idPeca;
+    @Positive
+    @NotNull
     private double valorPeca;
+    @NotBlank
     private String descricaoPeca;
+    @PositiveOrZero
     private int quantidadePeca;
 
     public PecaTO() {
@@ -16,6 +22,7 @@ public class PecaTO {
     public void setIdPeca(Long idPeca) {
         this.idPeca = idPeca;
     }
+
 
     public double getValorPeca() {
         return valorPeca;

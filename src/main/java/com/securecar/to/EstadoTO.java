@@ -1,8 +1,13 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class EstadoTO {
     private int idEstado;
+    @NotBlank
     private String nomeEstado;
+    @NotNull
     private int idPais;
 
     public EstadoTO() {

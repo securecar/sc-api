@@ -1,9 +1,14 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.NotNull;
+
 public class DadosTO {
     private int idDados;
+    @NotNull
     private int idLogradouro;
+    @NotNull
     private int idEmail;
+    @NotNull
     private int idTelefone;
 
     public DadosTO() {

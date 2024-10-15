@@ -1,10 +1,15 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+
 import java.time.LocalDate;
 
 public class ConversaTO {
     private Long idConversa;
+    @PastOrPresent
     private LocalDate dataConversa;
+    @NotNull
     private Long idIncidente;
 
     public ConversaTO() {

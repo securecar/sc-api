@@ -1,8 +1,13 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class EmailTO {
     private Long idEmail;
+    @NotBlank
     private char status;
+    @Email
     private String descricao;
 
     public EmailTO() {
