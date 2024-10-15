@@ -1,18 +1,18 @@
 package com.securecar.to;
 
 public class EmailTO {
-    private int idEmail;
+    private Long idEmail;
     private char status;
     private String descricao;
 
     public EmailTO() {
     }
 
-    public int getIdEmail() {
+    public Long getIdEmail() {
         return idEmail;
     }
 
-    public void setIdEmail(int idEmail) {
+    public void setIdEmail(Long idEmail) {
         this.idEmail = idEmail;
     }
 
