@@ -1,11 +1,23 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+
 public class LogradouroTO {
     private int idLogradouro;
+    @NotBlank
     private int cep;
+    @NotBlank
     private String nomeLogradouro;
+    @NotBlank
+    @Size(min=2, max=4)
+    @Positive
     private int numLogradouro;
+    @NotBlank
     private String descricaoLogradouro;
+    @NotNull
     private int idBairro;
 
     public LogradouroTO() {
