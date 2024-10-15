@@ -1,8 +1,15 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class CarroSeguroTO {
     private Long idCarroSeguro;
+    @NotBlank
+    @Size(min = 1, max = 1)
     private char statusSeguro;
+    @NotNull
     private Long idSeguro;
 
     public CarroSeguroTO() {

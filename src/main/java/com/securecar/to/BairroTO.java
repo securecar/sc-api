@@ -1,8 +1,13 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class BairroTO {
     private int idBairro;
+    @NotBlank
     private String nomeBairro;
+    @NotNull
     private int idCidade;
 
     public BairroTO() {

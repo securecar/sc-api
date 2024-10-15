@@ -1,13 +1,22 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.*;
+
 public class CarroTO {
     private Long idCarro;
+    @NotNull
     private String modelo;
+    @PastOrPresent
     private int ano;
+    @NotBlank
     private String placa;
+    @NotBlank
     private String chassi;
+    @PositiveOrZero
     private Double quilometragem;
+    @NotNull
     private Long idUsuario;
+    @Null
     private Long idCarroSeguro;
 
     public CarroTO() {
