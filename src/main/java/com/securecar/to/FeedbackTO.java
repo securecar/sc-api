@@ -1,6 +1,7 @@
 package com.securecar.to;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class FeedbackTO {
@@ -10,6 +11,7 @@ public class FeedbackTO {
     @Size(min = 1, max = 5)
     private int estrelasFeedback;
 
+    @NotNull
     private Long idUsuario;
 
     public FeedbackTO() {
