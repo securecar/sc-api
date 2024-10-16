@@ -1,5 +1,6 @@
 package com.securecar.resource;
 
+import com.securecar.bo.EmailBO;
 import com.securecar.bo.PecaBO;
 import com.securecar.to.EmailTO;
 import com.securecar.to.PecaTO;
@@ -17,7 +18,7 @@ public class EmailResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll(){
         emailBO = new EmailBO();
-        ArrayList<PecaTO> resultado = emailBO.findAll();
+        ArrayList<EmailTO> resultado = emailBO.findAll();
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();
@@ -34,7 +35,7 @@ public class EmailResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") Long id){
         emailBO = new EmailBO();
-        PecaTO resultado = emailBO.findById(id);
+        EmailTO resultado = emailBO.findById(id);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();
@@ -50,7 +51,39 @@ public class EmailResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response save(EmailTO email){
         emailBO = new EmailBO();
-        PecaTO resultado = emailBO.save(email);
+        EmailTO resultado = emailBO.save(email);
+        Response.ResponseBuilder response = null;
+        if (resultado != null){
+            response = Response.ok();
+        }
+        else{
+            response = Response.status(404);
+        }
+        response.entity(resultado);
+        return response.build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response delete (Long id){
+        emailBO = new EmailBO();
+        Response.ResponseBuilder response = null;
+        if (emailBO.delete(id)){
+            response = Response.status(204);
+        }
+        else{
+            response = Response.status(404);
+        }
+        return response.build();
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response edit(@PathParam("id") Long id , EmailTO email){
+        emailBO = new EmailBO();
+        EmailTO resultado = emailBO.edit(id, email);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();

@@ -53,11 +53,11 @@ public class PecaDAO extends Repository{
     }
 
     public PecaTO save(PecaTO pecaTO){
-        String sql = "INSERT INTO t_securecar_peca(ds_peca, qt_peca, vl_peca) values (?, ?, ?)";
+        String sql = "INSERT INTO t_securecar_peca(VL_PECA, DS_PECA, QT_PECA) values (?, ?, ?)";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
-            ps.setString(1, pecaTO.getDescricaoPeca());
-            ps.setInt(2, pecaTO.getQuantidadePeca());
-            ps.setDouble(3, pecaTO.getValorPeca());
+            ps.setDouble(1, pecaTO.getValorPeca());
+            ps.setString(2, pecaTO.getDescricaoPeca());
+            ps.setInt(3, pecaTO.getQuantidadePeca());
             if (ps.executeUpdate() > 0){
                 return pecaTO;
             }
