@@ -20,4 +20,14 @@ public class EmailBO {
         emailDAO = new EmailDAO();
         return emailDAO.save(EmailTO);
     }
+
+    public boolean delete(Long codigo){
+        emailDAO = new EmailDAO();
+        return emailDAO.delete(codigo);
+    }
+
+    public EmailTO edit (Long id, EmailTO email){
+        emailDAO = new EmailDAO();
+        return emailDAO.edit(id, email);
+    }
 }
