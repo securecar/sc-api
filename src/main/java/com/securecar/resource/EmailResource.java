@@ -63,10 +63,25 @@ public class EmailResource {
         return response.build();
     }
 
+    @DELETE
+    @Path("/{id}")
+    public Response delete (Long id){
+        emailBO = new EmailBO();
+        Response.ResponseBuilder response = null;
+        if (emailBO.delete(id)){
+            response = Response.status(204);
+        }
+        else{
+            response = Response.status(404);
+        }
+        return response.build();
+    }
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response edit(Long id , EmailTO email){
+    @Path("/{id}")
+    public Response edit(@PathParam("id") Long id , EmailTO email){
         emailBO = new EmailBO();
         EmailTO resultado = emailBO.edit(id, email);
         Response.ResponseBuilder response = null;
