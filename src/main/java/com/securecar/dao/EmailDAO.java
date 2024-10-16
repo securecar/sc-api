@@ -67,4 +67,36 @@ public class EmailDAO extends Repository{
         }
         return null;
     }
+
+    public boolean delete (Long codigo){
+        String sql = "delete T_SECURECAR_EMAIL where ID_EMAIL = ?";
+        try(PreparedStatement ps = getConnection().prepareStatement(sql)){
+            ps.setLong(1,codigo);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Erro ao editar: " + e.getMessage());
+        } finally {
+            closeConnection();
+        }
+        return false;
+    }
+
+    public EmailTO edit(Long id, EmailTO email){
+        String sql = "update T_SECURECAR_EMAIL set DS_EMAIL = ?, ST_EMAIL = ? where ID_EMAIL = ?";
+        try(PreparedStatement ps = getConnection().prepareStatement(sql)){
+            ps.setLong(3, id);
+            ps.setString(1, email.getDescricao());
+            ps.setString(2, String.valueOf(email.getStatus()));
+            email.setIdEmail(id);
+            if (ps.executeUpdate() > 0){
+                return email;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao editar: " + e.getMessage());
+        } finally {
+            closeConnection();
+        }
+        return null;
+    }
+
 }
