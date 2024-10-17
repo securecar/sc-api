@@ -6,6 +6,7 @@ import com.securecar.to.DadosTO;
 import com.securecar.to.EmailTO;
 import com.securecar.to.TelefoneTO;
 import com.securecar.to.TelefoneTO;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -47,7 +48,7 @@ public class TelefoneResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response save(TelefoneTO telefone){
+    public Response save(@Valid TelefoneTO telefone){
         telefoneBO = new TelefoneBO();
         TelefoneTO resultado = telefoneBO.save(telefone);
         Response.ResponseBuilder response = null;
@@ -78,7 +79,7 @@ public class TelefoneResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response edit(@PathParam("id") Long id , TelefoneTO telefone){
+    public Response edit(@PathParam("id") Long id , @Valid TelefoneTO telefone){
         telefoneBO = new TelefoneBO();
         TelefoneTO resultado = telefoneBO.edit(id, telefone);
         Response.ResponseBuilder response = null;

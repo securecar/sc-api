@@ -2,10 +2,12 @@ package com.securecar.to;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public class EmailTO {
     private Long idEmail;
     @NotBlank
+    @Pattern(regexp = "^[AI]$", message = "O valor deve ser 'A' ou 'I'")
     private char status;
     @Email
     private String descricao;
