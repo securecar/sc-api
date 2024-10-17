@@ -1,12 +1,21 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+
 import java.time.LocalDate;
 
 public class IncidenteTO {
     private Long idIncidente;
+    @NotBlank
     private String desciIncidente;
+    @NotBlank
+    @PastOrPresent
     private LocalDate dataIncidente;
+    @NotNull
     private Long idConversa;
+    @NotNull
     private Long idUsuario;
 
     public IncidenteTO() {
