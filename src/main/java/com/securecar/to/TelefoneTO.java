@@ -1,7 +1,7 @@
 package com.securecar.to;
 
 public class TelefoneTO {
-    private int idTelefone;
+    private Long idTelefone;
     private char status;
     private char tipo;
     private int ddi;
@@ -11,11 +11,11 @@ public class TelefoneTO {
     public TelefoneTO() {
     }
 
-    public int getIdTelefone() {
+    public Long getIdTelefone() {
         return idTelefone;
     }
 
-    public void setIdTelefone(int idTelefone) {
+    public void setIdTelefone(Long idTelefone) {
         this.idTelefone = idTelefone;
     }
 
