@@ -1,24 +1,20 @@
 package com.securecar.resource;
 
-
-import com.securecar.bo.SeguroBO;
-
-
-import com.securecar.to.SeguroTO;
-
+import com.securecar.bo.ConversaBO;
+import com.securecar.to.ConversaTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 
-public class SeguroResource {
-    SeguroBO seguroBO;
+public class ConversaResource {
+    ConversaBO conversaBO;
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll(){
-        seguroBO = new SeguroBO();
-        ArrayList<SeguroTO> resultado = seguroBO.findAll();
+        conversaBO = new ConversaBO();
+        ArrayList<ConversaTO> resultado = conversaBO.findAll();
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();
@@ -33,8 +29,8 @@ public class SeguroResource {
     @GET
     @Path("/{id}")
     public Response findById(@PathParam("id") Long id){
-        seguroBO = new SeguroBO();
-        SeguroTO resultado = seguroBO.findById(id);
+        conversaBO = new ConversaBO();
+        ConversaTO resultado = conversaBO.findById(id);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();
@@ -47,9 +43,9 @@ public class SeguroResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response save(SeguroTO seguro){
-        seguroBO = new SeguroBO();
-        SeguroTO resultado = seguroBO.save(seguro);
+    public Response save(ConversaTO conversa){
+        conversaBO = new ConversaBO();
+        ConversaTO resultado = conversaBO.save(conversa);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.created(null);
@@ -62,9 +58,9 @@ public class SeguroResource {
     @DELETE
     @Path("/{id}")
     public Response delete (@PathParam("id")Long id){
-        seguroBO = new SeguroBO();
+        conversaBO = new ConversaBO();
         Response.ResponseBuilder response = null;
-        if (seguroBO.delete(id)){
+        if (conversaBO.delete(id)){
             response = Response.status(204);
         }
         else{
@@ -77,9 +73,9 @@ public class SeguroResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response edit(@PathParam("id") Long id , SeguroTO seguro){
-        seguroBO = new SeguroBO();
-        SeguroTO resultado = seguroBO.edit(id, seguro);
+    public Response edit(@PathParam("id") Long id , ConversaTO conversa){
+        conversaBO = new ConversaBO();
+        ConversaTO resultado = conversaBO.edit(id, conversa);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();
