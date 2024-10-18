@@ -6,10 +6,10 @@ import jakarta.validation.constraints.Pattern;
 
 public class EmailTO {
     private Long idEmail;
-    @NotBlank
+    @NotBlank(message = "")
     @Pattern(regexp = "^[AI]$", message = "O valor deve ser 'A' ou 'I'")
     private char status;
-    @Email
+    @Email(message = "Insira um email válido!")
     private String descricao;
 
     public EmailTO() {

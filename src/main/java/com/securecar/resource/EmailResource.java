@@ -80,17 +80,16 @@ public class EmailResource {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response edit(@PathParam("id") Long id , @Valid EmailTO email){
         emailBO = new EmailBO();
         EmailTO resultado = emailBO.edit(id, email);
         Response.ResponseBuilder response = null;
         if (resultado != null){
-            response = Response.ok();
+            response = Response.created(null);
         }
         else{
-            response = Response.status(404);
+            response = Response.status(400);
         }
         response.entity(resultado);
         return response.build();
