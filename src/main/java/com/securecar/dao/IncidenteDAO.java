@@ -2,6 +2,7 @@ package com.securecar.dao;
 
 import com.securecar.to.IncidenteTO;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,13 +56,19 @@ public class IncidenteDAO extends Repository{
     }
 
     public IncidenteTO save(IncidenteTO incidente){
-        String sql = "insert into t_securecar_incidente (DS_INCIDENTE, DT_INCIDENTE) values (?, ?)";
+        String sql = "insert into t_securecar_incidente (ID_USUARIO, ID_CONVERSA ,DS_INCIDENTE, DT_INCIDENTE) values (?, ?, ?, ?)";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
-            ps.setString(1, IncidenteTO.getDesciIncidente());
-            ps.setDate();
+            ps.setLong(1, incidente.getIdUsuario());
+            ps.setLong(2, incidente.getIdConversa());
+            ps.setString(3, incidente.getDesciIncidente());
+            ps.setDate(4, Date.valueOf(incidente.getDataIncidente()));
         } catch (SQLException e) {
             System.out.println("Erro de SQL! " + e.getMessage());
+        } finally {
+            closeConnection();
         }
 
+        return null;
     }
+
 }
