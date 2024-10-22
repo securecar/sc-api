@@ -31,5 +31,26 @@ public class IncidenteDAO extends Repository{
         }
         return incidentes;
     }
+    public IncidenteTO findById(Long id){
+        IncidenteTO incidente = new IncidenteTO();
+        String sql = "select from t_securecar_incidente where id_incidente = ?";
+        try(PreparedStatement ps = getConnection().prepareStatement(sql)) {
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                incidente.setIdIncidente(rs.getLong("id_incidente"));
+                incidente.setDataIncidente(rs.getDate("dt_incidente").toLocalDate());
+                incidente.setDesciIncidente(rs.getString("ds_incidente"));
+                incidente.setIdUsuario(rs.getLong("id_usuario"));
+                incidente.setIdConversa(rs.getLong("id_conversa"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro de SQL! " + e.getMessage());
+        } finally{
+            closeConnection();
+        }
+        return incidente;
+    }
+
 
 }
