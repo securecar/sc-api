@@ -4,6 +4,7 @@ import com.securecar.bo.EmailBO;
 import com.securecar.bo.PecaBO;
 import com.securecar.to.EmailTO;
 import com.securecar.to.PecaTO;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -49,7 +50,7 @@ public class EmailResource {
 
     @Post
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response save(EmailTO email){
+    public Response save(@Valid EmailTO email){
         emailBO = new EmailBO();
         EmailTO resultado = emailBO.save(email);
         Response.ResponseBuilder response = null;
@@ -65,7 +66,7 @@ public class EmailResource {
 
     @DELETE
     @Path("/{id}")
-    public Response delete (Long id){
+    public Response delete (@PathParam("id") Long id){
         emailBO = new EmailBO();
         Response.ResponseBuilder response = null;
         if (emailBO.delete(id)){
@@ -81,7 +82,7 @@ public class EmailResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response edit(@PathParam("id") Long id , EmailTO email){
+    public Response edit(@PathParam("id") Long id , @Valid EmailTO email){
         emailBO = new EmailBO();
         EmailTO resultado = emailBO.edit(id, email);
         Response.ResponseBuilder response = null;

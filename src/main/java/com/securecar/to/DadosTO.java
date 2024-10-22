@@ -3,46 +3,46 @@ package com.securecar.to;
 import jakarta.validation.constraints.NotNull;
 
 public class DadosTO {
-    private int idDados;
+    private Long idDados;
     @NotNull
-    private int idLogradouro;
+    private Long idLogradouro;
     @NotNull
-    private int idEmail;
+    private Long idEmail;
     @NotNull
-    private int idTelefone;
+    private Long idTelefone;
 
     public DadosTO() {
     }
 
-    public int getIdDados() {
+    public Long getIdDados() {
         return idDados;
     }
 
-    public void setIdDados(int idDados) {
+    public void setIdDados(Long idDados) {
         this.idDados = idDados;
     }
 
-    public int getIdLogradouro() {
+    public Long getIdLogradouro() {
         return idLogradouro;
     }
 
-    public void setIdLogradouro(int idLogradouro) {
+    public void setIdLogradouro(Long idLogradouro) {
         this.idLogradouro = idLogradouro;
     }
 
-    public int getIdEmail() {
+    public Long getIdEmail() {
         return idEmail;
     }
 
-    public void setIdEmail(int idEmail) {
+    public void setIdEmail(Long idEmail) {
         this.idEmail = idEmail;
     }
 
-    public int getIdTelefone() {
+    public Long getIdTelefone() {
         return idTelefone;
     }
 
-    public void setIdTelefone(int idTelefone) {
+    public void setIdTelefone(Long idTelefone) {
         this.idTelefone = idTelefone;
     }
 }
