@@ -29,35 +29,35 @@ public class IncidenteTO {
         this.idIncidente = idIncidente;
     }
 
-    public @NotBlank String getDesciIncidente() {
+    public String getDesciIncidente() {
         return desciIncidente;
     }
 
-    public void setDesciIncidente(@NotBlank String desciIncidente) {
+    public void setDesciIncidente(String desciIncidente) {
         this.desciIncidente = desciIncidente;
     }
 
-    public @NotBlank @PastOrPresent LocalDate getDataIncidente() {
+    public LocalDate getDataIncidente() {
         return dataIncidente;
     }
 
-    public void setDataIncidente(@NotBlank @PastOrPresent LocalDate dataIncidente) {
+    public void setDataIncidente(LocalDate dataIncidente) {
         this.dataIncidente = dataIncidente;
     }
 
-    public @NotNull Long getIdConversa() {
+    public Long getIdConversa() {
         return idConversa;
     }
 
-    public void setIdConversa(@NotNull Long idConversa) {
+    public void setIdConversa(Long idConversa) {
         this.idConversa = idConversa;
     }
 
-    public @NotNull Long getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(@NotNull Long idUsuario) {
+    public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 }

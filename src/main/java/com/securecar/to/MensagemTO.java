@@ -3,7 +3,6 @@ package com.securecar.to;
 import jakarta.validation.constraints.NotNull;
 
 public class MensagemTO {
-    @NotNull
     private Long idConversa;
     @NotNull
     private Long idMensagem;
@@ -15,36 +14,35 @@ public class MensagemTO {
     public MensagemTO() {
     }
 
-    public @NotNull Long getIdConversa() {
+    public Long getIdConversa() {
         return idConversa;
     }
 
-    public void setIdConversa(@NotNull Long idConversa) {
+    public void setIdConversa(Long idConversa) {
         this.idConversa = idConversa;
     }
 
-    public @NotNull Long getIdMensagem() {
+    public Long getIdMensagem() {
         return idMensagem;
     }
 
-    public void setIdMensagem(@NotNull Long idMensagem) {
+    public void setIdMensagem(Long idMensagem) {
         this.idMensagem = idMensagem;
     }
 
-    @NotNull
     public int getTipoMensagem() {
         return tipoMensagem;
     }
 
-    public void setTipoMensagem(@NotNull int tipoMensagem) {
+    public void setTipoMensagem(int tipoMensagem) {
         this.tipoMensagem = tipoMensagem;
     }
 
-    public @NotNull String getTextoMensagem() {
+    public String getTextoMensagem() {
         return textoMensagem;
     }
 
-    public void setTextoMensagem(@NotNull String textoMensagem) {
+    public void setTextoMensagem(String textoMensagem) {
         this.textoMensagem = textoMensagem;
     }
 }
