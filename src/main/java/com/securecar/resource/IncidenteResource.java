@@ -1,5 +1,6 @@
 package com.securecar.resource;
 
+import com.securecar.bo.IncidenteBO;
 import com.securecar.to.ConsertoTO;
 import com.securecar.to.IncidenteTO;
 import com.securecar.to.UsuarioTO;
