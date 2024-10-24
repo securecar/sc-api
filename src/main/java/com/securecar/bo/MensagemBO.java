@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class MensagemBO {
     MensagemDAO MensagemDAO;
-    public ArrayList<MensagemTO> findALl(){
+    public ArrayList<MensagemTO> findAll(){
         MensagemDAO = new MensagemDAO();
         return  MensagemDAO.findAll();
     }
 
-    public MensagemTO findByID(Long id){
+    public MensagemTO findById(Long id){
         MensagemDAO = new MensagemDAO();
         return MensagemDAO.findById(id);
     }
