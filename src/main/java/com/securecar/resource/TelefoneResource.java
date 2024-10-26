@@ -1,11 +1,6 @@
 package com.securecar.resource;
 
 import com.securecar.bo.TelefoneBO;
-import com.securecar.bo.TelefoneBO;
-import com.securecar.to.DadosTO;
-import com.securecar.to.EmailTO;
-import com.securecar.to.TelefoneTO;
-import com.securecar.to.TelefoneTO;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

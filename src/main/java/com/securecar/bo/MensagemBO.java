@@ -1,7 +1,6 @@
 package com.securecar.bo;
 
 import com.securecar.dao.MensagemDAO;
-import com.securecar.to.MensagemTO;
 
 import java.util.ArrayList;
 

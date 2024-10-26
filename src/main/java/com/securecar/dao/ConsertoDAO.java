@@ -2,8 +2,10 @@ package com.securecar.dao;
 
 import com.securecar.to.ConsertoTO;
 import com.securecar.to.consertoTO;
+import com.securecar.to.consertoTO;
 import jakarta.validation.constraints.conserto;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +24,7 @@ public class ConsertoDAO extends Repository{
                     conserto.setDescricaoConserto(rs.getString("ds_conserto"));
                     conserto.setValorConserto(rs.getDouble("vl_conserto"));
                     conserto.setDataConserto(rs.getDate("dt_conserto").toLocalDate());
-                    conserto.setIdIncidente(rs.getLong("id_incidente"));
+                    conserto.setIdIncidente(rs.getLong("id_usuario"));
                     consertos.add(conserto);
                 }
             }
@@ -42,10 +44,10 @@ public class ConsertoDAO extends Repository{
             if (rs.next()){
                 ConsertoTO conserto = new ConsertoTO();
                 conserto.setIdConserto(rs.getLong("id_conserto"));
-                conserto.setIdIncidente(rs.getLong("id_incidente"));
+                conserto.setIdIncidente(rs.getLong("id_usuario"));
                 conserto.setDescricaoConserto(rs.getString("ds_conserto"));
                 conserto.setValorConserto(rs.getDouble("vl_conserto"));
-                conserto.setDataConserto(rs.getDate("dt_consert").toLocalDate());
+                conserto.setDataConserto(rs.getDate("dt_conserto").toLocalDate());
                 return conserto;
             }
         }
@@ -57,8 +59,8 @@ public class ConsertoDAO extends Repository{
         return null;
     }
 
-    public ConsertoTO save(consertoTO conserto){
-        String sql = "insert into t_securecar_conserto (ds_conserto, st_conserto) values (?, ?)";
+    public ConsertoTO save(ConsertoTO conserto){
+        String sql = "insert into t_securecar_conserto (DT_CONSERTO, DS_CONSERTO, VL_CONSERTO, ID_USUARIO) values (?, ?)";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
             ps.setString(1, conserto.getDescricao());
             ps.setString(2, String.valueOf(conserto.getStatus()));
@@ -68,6 +70,34 @@ public class ConsertoDAO extends Repository{
         } catch (SQLException e){
             System.out.println("Erro de sql! " + e.getMessage());
         } finally {
+            closeConnection();
+        }
+        return null;
+    }
+
+    public boolean delete(Long id){
+        String sql = "Delete t_securecar_conserto where id_conserto = ?";
+        try(PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setLong(1,id);
+            return ps.executeUpdate()>0;
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar: " + e.getMessage());
+        }
+        return false;
+    }
+    public ConsertoTO edit(Long id, ConsertoTO conserto){
+        String sql = "update t_securecar_conserto set dt_conserto=?, DS_CONSERTO=? where id_conserto =?";
+        try(PreparedStatement ps = getConnection().prepareStatement(sql)){
+            ps.setDate(1, Date.valueOf(conserto.getDataconserto()));
+            ps.setLong(2, conserto.getIdIncidente());
+            ps.setLong(3,id);
+            conserto.setIdconserto(id);
+            if (ps.executeUpdate() > 0){
+                return conserto;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao editar: " + e.getMessage());
+        }finally {
             closeConnection();
         }
         return null;

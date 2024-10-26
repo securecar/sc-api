@@ -1,7 +1,5 @@
 package com.securecar.dao;
 
-import com.securecar.to.DadosTO;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

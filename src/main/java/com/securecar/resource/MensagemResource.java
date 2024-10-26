@@ -1,7 +1,6 @@
 package com.securecar.resource;
 
 import com.securecar.bo.MensagemBO;
-import com.securecar.to.MensagemTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;

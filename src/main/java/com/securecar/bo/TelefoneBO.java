@@ -1,7 +1,6 @@
 package com.securecar.bo;
 
 import com.securecar.dao.TelefoneDAO;
-import com.securecar.to.TelefoneTO;
 
 import java.util.ArrayList;
 

@@ -2,11 +2,13 @@ package com.securecar.to;
 
 import jakarta.validation.constraints.*;
 
+import java.time.Year;
+
 public class CarroTO {
     private Long idCarro;
     @NotNull
     private String modelo;
-    @PastOrPresent
+
     private int ano;
     @NotBlank
     private String placa;
@@ -17,7 +19,7 @@ public class CarroTO {
     @NotNull
     private Long idUsuario;
     @Null
-    private Long idCarroSeguro;
+    private Long idSeguro;
 
     public CarroTO() {
     }
@@ -78,11 +80,11 @@ public class CarroTO {
         this.idUsuario = idUsuario;
     }
 
-    public Long getIdCarroSeguro() {
-        return idCarroSeguro;
+    public Long getIdSeguro() {
+        return idSeguro;
     }
 
-    public void setIdCarroSeguro(Long idCarroSeguro) {
-        this.idCarroSeguro = idCarroSeguro;
+    public void setIdSeguro(Long idSeguro) {
+        this.idSeguro = idSeguro;
     }
 }

@@ -1,8 +1,5 @@
 package com.securecar.dao;
 
-import com.securecar.to.ConversaTO;
-import com.securecar.to.SeguroTO;
-
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

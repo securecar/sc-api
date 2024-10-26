@@ -1,7 +1,5 @@
 package com.securecar.dao;
 
-import com.securecar.to.MensagemTO;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -82,7 +80,7 @@ public class MensagemDAO extends Repository {
     }
 
     public MensagemTO edit(Long id, MensagemTO mensagem){
-        String sql = "update T_SECURTECAR_MENSAGEM set TP_MENSAGEM = ?, TX_MENSAGEM = ? where ID_MENSAGEM = ?";
+        String sql = "update T_SECURECAR_MENSAGEM set TP_MENSAGEM = ?, TX_MENSAGEM = ? where ID_MENSAGEM = ?";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)) {
             ps.setLong(1, id);
             ps.setInt(2, mensagem.getTipoMensagem());

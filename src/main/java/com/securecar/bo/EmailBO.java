@@ -1,7 +1,6 @@
 package com.securecar.bo;
 
 import com.securecar.dao.EmailDAO;
-import com.securecar.to.EmailTO;
 
 import java.util.ArrayList;
 

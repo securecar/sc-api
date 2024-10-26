@@ -1,7 +1,5 @@
 package com.securecar.resource;
 
-import com.securecar.to.EmailTO;
-import com.securecar.to.LogradouroTO;
 import com.securecar.to.PecaTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

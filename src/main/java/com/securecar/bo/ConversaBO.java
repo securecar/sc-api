@@ -3,7 +3,6 @@ package com.securecar.bo;
 
 
 import com.securecar.dao.ConversaDAO;
-import com.securecar.to.ConversaTO;
 
 import java.util.ArrayList;
 

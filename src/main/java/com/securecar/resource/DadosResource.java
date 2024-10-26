@@ -1,11 +1,6 @@
 package com.securecar.resource;
 
 import com.securecar.bo.DadosBO;
-import com.securecar.bo.DadosBO;
-import com.securecar.to.DadosTO;
-import com.securecar.to.DadosTO;
-import com.securecar.to.IncidenteTO;
-import com.securecar.to.DadosTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;

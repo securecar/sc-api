@@ -1,7 +1,6 @@
 package com.securecar.resource;
 
 import com.securecar.bo.ConversaBO;
-import com.securecar.to.ConversaTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;

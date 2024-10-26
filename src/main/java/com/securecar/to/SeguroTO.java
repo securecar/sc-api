@@ -5,8 +5,6 @@ public class SeguroTO {
     private Long cnpj;
     private String nomeSeguro;
     private int incriscaoEstadual;
-    private Long idPessoa;
-    private Long idDadosGerais;
 
     public SeguroTO() {
     }
@@ -43,19 +41,4 @@ public class SeguroTO {
         this.incriscaoEstadual = incriscaoEstadual;
     }
 
-    public Long getIdPessoa() {
-        return idPessoa;
-    }
-
-    public void setIdPessoa(Long idPessoa) {
-        this.idPessoa = idPessoa;
-    }
-
-    public Long getIdDadosGerais() {
-        return idDadosGerais;
-    }
-
-    public void setIdDadosGerais(Long idDadosGerais) {
-        this.idDadosGerais = idDadosGerais;
-    }
 }

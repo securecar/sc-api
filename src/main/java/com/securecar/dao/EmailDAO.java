@@ -1,8 +1,5 @@
 package com.securecar.dao;
 
-import com.securecar.to.EmailTO;
-import jakarta.validation.constraints.Email;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

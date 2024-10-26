@@ -1,8 +1,13 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.NotNull;
+
 public class PecaConsertoTO {
     private Long idPecaConserto;
+    @NotNull
     private Long idConserto;
+
+    @NotNull
     private Long idPeca;
 
     public PecaConsertoTO() {

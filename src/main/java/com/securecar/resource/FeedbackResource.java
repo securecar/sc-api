@@ -1,9 +1,6 @@
 package com.securecar.resource;
 
 import com.securecar.bo.FeedbackBO;
-import com.securecar.to.EmailTO;
-import com.securecar.to.FeedbackTO;
-import com.securecar.to.LogradouroTO;
 import com.securecar.to.FeedbackTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -80,17 +77,16 @@ public class FeedbackResource {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response edit(@PathParam("id") Long id , FeedbackTO feedback){
         feedbackBO = new FeedbackBO();
         FeedbackTO resultado = feedbackBO.edit(id, feedback);
         Response.ResponseBuilder response = null;
         if (resultado != null){
-            response = Response.ok();
+            response = Response.created(null);
         }
         else{
-            response = Response.status(404);
+            response = Response.status(400);
         }
         response.entity(resultado);
         return response.build();
