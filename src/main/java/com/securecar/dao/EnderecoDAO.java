@@ -6,6 +6,7 @@ import com.securecar.to.EnderecoTO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class EnderecoDAO extends Repository{
@@ -65,7 +66,7 @@ public class EnderecoDAO extends Repository{
     public EnderecoTO save(EnderecoTO endereco){
         String sql = "insert into t_securecar_endereco (NR_CEP, NM_LOGRADOURO, NR_LOGRADOURO, CP_LOGRADOURO, " +
                 "NM_BAIRRO, NM_UF, NM_CIDADE) values (?, ?, ?, ?, ?, ?, ?)";
-        try(PreparedStatement ps = getConnection().prepareStatement(sql)){
+        try(PreparedStatement ps = getConnection().prepareStatement(sql,new String[]{"ID_ENDERECO"})){
             ps.setInt(1, endereco.getCep());
             ps.setString(2, endereco.getNomeLogradouro());
             ps.setInt(3, endereco.getNumeroLogradouro());
@@ -74,11 +75,12 @@ public class EnderecoDAO extends Repository{
             ps.setString(6, endereco.getUf());
             ps.setString(7, endereco.getCidade()); // Adicionando o parâmetro faltante
 
-            if (ps.executeUpdate() > 0){
+
+            if (ps.executeUpdate() > 0) {
                 try (ResultSet rs = ps.getGeneratedKeys()) {
-
-                        endereco.setIdEndereco(rs.getLong(8));
-
+                    if (rs.next()) {
+                        endereco.setIdEndereco(rs.getLong(1));
+                    }
                 }
                 return endereco;
             }
