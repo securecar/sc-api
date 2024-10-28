@@ -28,8 +28,8 @@ public class ConsertoBO {
         return consertoDAO.delete(codigo);
     }
 
-    public ConsertoTO edit(Long id, ConsertoTO conserto){
+    public ConsertoTO update(ConsertoTO conserto){
         consertoDAO = new ConsertoDAO();
-        return consertoDAO.edit(id, conserto);
+        return consertoDAO.update(conserto);
     }
 }

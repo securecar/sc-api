@@ -63,7 +63,7 @@ public class FeedbackResource {
 
     @DELETE
     @Path("/{id}")
-    public Response delete (Long id){
+    public Response delete (@PathParam("id") Long id){
         feedbackBO = new FeedbackBO();
         Response.ResponseBuilder response = null;
         if (feedbackBO.delete(id)){
