@@ -20,7 +20,6 @@ public class SeguroDAO extends Repository{
                     seguro.setCnpj(rs.getLong("nr_cnpj"));
                     seguro.setNomeSeguro(rs.getString("nm_seguro"));
                     seguro.setIncriscaoEstadual(rs.getInt("NR_INSC_ESTADUAL "));
-                    seguro.setIdDadosGerais(rs.getLong("id_dados"));
                     seguros.add(seguro);
                 }
             }
@@ -42,7 +41,6 @@ public class SeguroDAO extends Repository{
                 seguro.setCnpj(rs.getLong("nr_cnpj"));
                 seguro.setNomeSeguro(rs.getString("nm_seguro"));
                 seguro.setIncriscaoEstadual(rs.getInt("NR_INSC_ESTADUAL "));
-                seguro.setIdDadosGerais(rs.getLong("id_dados"));
             }
 
 
@@ -55,12 +53,11 @@ public class SeguroDAO extends Repository{
     }
 
     public SeguroTO save(SeguroTO seguro){
-        String sql = "insert into t_securecar_seguro (nr_cnpj,nm_seguro,nr_insc_estadual,id_dados) values (?,?,?,?)";
+        String sql = "insert into t_securecar_seguro (nr_cnpj,nm_seguro,nr_insc_estadual) values (?,?,?,?)";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
             ps.setLong(1,seguro.getCnpj());
             ps.setString(2,seguro.getNomeSeguro());
             ps.setLong(3,seguro.getIncriscaoEstadual());
-            ps.setLong(4,seguro.getIdDadosGerais());
             if(ps.executeUpdate() > 0){
                 return seguro;
             }
@@ -84,12 +81,11 @@ public class SeguroDAO extends Repository{
     }
 
     public SeguroTO edit(Long id, SeguroTO seguro){
-       String sql = "update t_securecar_seguro set nr_cnpj=?,nm_seguro=?,nr_insc_estadual=?,id_dados =? where id_seguro =?";
+       String sql = "update t_securecar_seguro set nr_cnpj=?,nm_seguro=?,nr_insc_estadual=? where id_seguro =?";
        try(PreparedStatement ps = getConnection().prepareStatement(sql)){
            ps.setLong(1,seguro.getCnpj());
            ps.setString(2, seguro.getNomeSeguro());
            ps.setLong(3,seguro.getIncriscaoEstadual());
-           ps.setLong(4,seguro.getIdDadosGerais());
            ps.setLong(5,id);
            seguro.setIdSeguro(id);
            if (ps.executeUpdate() > 0){

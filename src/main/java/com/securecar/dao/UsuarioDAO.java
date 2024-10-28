@@ -25,7 +25,6 @@ public class UsuarioDAO extends Repository {
                     usuario.setGenero(rs.getString("ds_genero"));
                     usuario.setSenha(rs.getString("ds_senha"));
                     usuario.setDataCriacaoConta(rs.getDate("dt_criacao_conta").toLocalDate());
-                    usuario.setIdDados(rs.getLong("id_dados_gerais"));
                     usuario.setRg(rs.getInt("nr_rg"));
                     usuarios.add(usuario);
                 }
@@ -52,7 +51,6 @@ public class UsuarioDAO extends Repository {
                 usuario.setSenha(rs.getString("ds_senha"));
                 usuario.setDataCriacaoConta(rs.getDate("dt_criacao_conta").toLocalDate());
                 usuario.setIdUsuario(rs.getLong("id_usuario"));
-                usuario.setIdDados(rs.getLong("id_dados_gerais"));
             }
         } catch (SQLException e) {
             System.out.println("Erro de sql! " + e.getMessage());
@@ -65,7 +63,7 @@ public class UsuarioDAO extends Repository {
 
     public UsuarioTO save(UsuarioTO usuarioTO){
         String sql = "insert into T_SECURECAR_USUARIO (NM_USUARIO, DT_CRIACAO_CONTA, NR_CPF, DS_SENHA, DS_GENERO, " +
-                "NR_RG, ID_DADOS_GERAIS) values (?, ?, ?, ?, ?, ?, ?)";
+                "NR_RG, ID_CONTATO, ID_ENDERECO) values (?, ?, ?, ?, ?, ?, ?, ?)";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
             ps.setString(1, usuarioTO.getNomeUsuario());
             ps.setDate(2, Date.valueOf(usuarioTO.getDataCriacaoConta()));
@@ -73,7 +71,6 @@ public class UsuarioDAO extends Repository {
             ps.setString(4, usuarioTO.getSenha());
             ps.setString(5, usuarioTO.getGenero());
             ps.setInt(6, usuarioTO.getRg());
-            ps.setLong(7, usuarioTO.getIdDados());
             if (ps.executeUpdate() > 0){
                 return usuarioTO;
             }

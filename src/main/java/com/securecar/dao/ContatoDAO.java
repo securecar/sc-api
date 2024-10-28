@@ -69,6 +69,8 @@ public class ContatoDAO extends Repository{
         return null;
     }
 
+
+
     public boolean delete(Long id){
         String sql = "Delete T_SECURECAR_CONTATO where ID_CONTATO = ?";
         try(PreparedStatement ps = connection.prepareStatement(sql)){

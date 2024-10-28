@@ -1,4 +1,0 @@
-datasource.url=jdbc:oracle:thin:@<host>:1521:orcl
-datasource.username=<user>
-datasource.password=<password>
-datasource.driver-class-name=oracle.jdbc.driver.OracleDriver

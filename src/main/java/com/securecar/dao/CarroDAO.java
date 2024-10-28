@@ -23,7 +23,6 @@ public class CarroDAO extends Repository{
                     carro.setChassi(rs.getString("ds_chassi"));
                     carro.setQuilometragem(rs.getDouble("km_carro"));
                     carro.setIdUsuario(rs.getLong("id_usuario"));
-                    carro.setIdCarroSeguro(rs.getLong("id_carro_seguro"));
                     carros.add(carro);
                 }
             }
@@ -48,7 +47,6 @@ public class CarroDAO extends Repository{
                         carro.setChassi(rs.getString("ds_chassi"));
                         carro.setQuilometragem(rs.getDouble("km_carro"));
                         carro.setIdUsuario(rs.getLong("id_usuario"));
-                        carro.setIdCarroSeguro(rs.getLong("id_carro_seguro"));
                         return carro;
                     }
                 } catch (SQLException e) {
@@ -60,7 +58,8 @@ public class CarroDAO extends Repository{
     }
 
     public CarroTO save(CarroTO carro){
-        String sql = "insert into t_securecar_carro (NM_MODELO, NR_ANO, NR_PLACA, DS_CHASSI, KM_CARRO, ID_USUARIO, ID_CARRO_SEGURO)";
+        String sql = "insert into t_securecar_carro (NM_MODELO, NR_ANO, NR_PLACA, DS_CHASSI, KM_CARRO, ID_USUARIO) " +
+                "values (?, ?, ?, ?, ?, ?)";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)) {
             ps.setString(1, carro.getModelo());
             ps.setInt(2, carro.getAno());
@@ -68,7 +67,6 @@ public class CarroDAO extends Repository{
             ps.setString(4, carro.getChassi());
             ps.setDouble(5, carro.getQuilometragem());
             ps.setLong(6, carro.getIdUsuario());
-            ps.setLong(7, carro.getIdCarroSeguro());
             if(ps.executeUpdate() > 0) {
                 return carro;
             }

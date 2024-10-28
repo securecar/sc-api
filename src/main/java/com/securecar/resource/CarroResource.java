@@ -15,7 +15,7 @@ public class CarroResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll(){
         carroBO = new CarroBO();
-        ArrayList<UsuarioTO> resultado = carroBO.findAll();
+        ArrayList<CarroTO> resultado = carroBO.findAll();
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();
@@ -31,7 +31,7 @@ public class CarroResource {
     @Path("/{id}")
     public Response findById(@PathParam("id") Long id){
         carroBO = new CarroBO();
-        UsuarioTO resultado = carroBO.findById(id);
+        CarroTO resultado = carroBO.findById(id);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();
@@ -46,7 +46,7 @@ public class CarroResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response save(CarroTO carro){
         carroBO = new CarroBO();
-        UsuarioTO resultado = carroBO.save(carro);
+        CarroTO resultado = carroBO.save(carro);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.created(null);
