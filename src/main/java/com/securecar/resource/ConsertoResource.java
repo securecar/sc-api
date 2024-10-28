@@ -1,7 +1,10 @@
 package com.securecar.resource;
 
+import com.securecar.bo.ConsertoBO;
+import com.securecar.bo.ContatoBO;
 import com.securecar.to.CarroTO;
 import com.securecar.to.ConsertoTO;
+import com.securecar.to.ContatoTO;
 import com.securecar.to.UsuarioTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -15,7 +18,7 @@ public class ConsertoResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll(){
         consertoBO = new ConsertoBO();
-        ArrayList<UsuarioTO> resultado = consertoBO.findAll();
+        ArrayList<ConsertoTO> resultado = consertoBO.findAll();
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();
@@ -31,7 +34,7 @@ public class ConsertoResource {
     @Path("/{id}")
     public Response findById(@PathParam("id") Long id){
         consertoBO = new ConsertoBO();
-        UsuarioTO resultado = consertoBO.findById(id);
+        ConsertoTO resultado = consertoBO.findById(id);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();
@@ -46,11 +49,43 @@ public class ConsertoResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response save(ConsertoTO conserto){
         consertoBO = new ConsertoBO();
-        UsuarioTO resultado = consertoBO.save(conserto);
+        ConsertoTO resultado = consertoBO.save(conserto);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.created(null);
         } else{
+            response = Response.status(400);
+        }
+        response.entity(resultado);
+        return response.build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response delete (@PathParam("id") Long id){
+        consertoBO = new ConsertoBO();
+        Response.ResponseBuilder response = null;
+        if (consertoBO.delete(id)){
+            response = Response.status(204);
+        }
+        else{
+            response = Response.status(404);
+        }
+        return response.build();
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response update(@PathParam("id") Long id , ConsertoTO conserto){
+        consertoBO = new ConsertoBO();
+        conserto.setIdConserto(id);
+        ConsertoTO resultado = consertoBO.update(conserto);
+        Response.ResponseBuilder response = null;
+        if (resultado != null){
+            response = Response.created(null);
+        }
+        else{
             response = Response.status(400);
         }
         response.entity(resultado);

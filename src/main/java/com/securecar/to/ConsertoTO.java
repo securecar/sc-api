@@ -17,7 +17,7 @@ public class ConsertoTO {
     @Positive
     private double valorConserto;
     @NotNull
-    private Long idIncidente;
+    private Long idUsuario;
 
     public ConsertoTO() {
     }
@@ -54,11 +54,11 @@ public class ConsertoTO {
         this.valorConserto = valorConserto;
     }
 
-    public Long getIdIncidente() {
-        return idIncidente;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdIncidente(Long idIncidente) {
-        this.idIncidente = idIncidente;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }
