@@ -16,6 +16,11 @@ public class PecaBO {
         return pecaDAO.findById(id);
     }
 
+    public ArrayList<PecaTO> findAllByIdConserto(Long id){
+        pecaDAO = new PecaDAO();
+        return pecaDAO.findAllByIdConserto(id);
+    }
+
     public PecaTO save(PecaTO pecaTO){
         pecaDAO = new PecaDAO();
         return pecaDAO.save(pecaTO);

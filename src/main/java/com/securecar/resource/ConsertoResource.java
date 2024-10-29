@@ -2,10 +2,8 @@ package com.securecar.resource;
 
 import com.securecar.bo.ConsertoBO;
 import com.securecar.bo.ContatoBO;
-import com.securecar.to.CarroTO;
-import com.securecar.to.ConsertoTO;
-import com.securecar.to.ContatoTO;
-import com.securecar.to.UsuarioTO;
+import com.securecar.bo.PecaBO;
+import com.securecar.to.*;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -43,6 +41,23 @@ public class ConsertoResource {
         }
         response.entity(resultado);
         return response.build();
+    }
+
+    @GET
+    @Path("/{id}/pecas")
+    public Response findAllPecas(@PathParam("id") Long id){
+        PecaBO pecaBO = new PecaBO();
+        ArrayList<PecaTO> resultado = pecaBO.findAllByIdConserto(id);
+        Response.ResponseBuilder response = null;
+        if (resultado != null){
+            response = Response.ok();
+        }
+        else{
+            response = Response.status(404);
+        }
+        response.entity(resultado);
+        return response.build();
+
     }
 
     @POST
