@@ -12,6 +12,9 @@ public class PecaTO {
     @PositiveOrZero
     private int quantidadePeca;
 
+    @Positive
+    private int quantidadePedido;
+
     public PecaTO() {
     }
 
@@ -46,6 +49,14 @@ public class PecaTO {
 
     public void setQuantidadePeca(int quantidadePeca) {
         this.quantidadePeca = quantidadePeca;
+    }
+
+    public int getQuantidadePedido() {
+        return quantidadePedido;
+    }
+
+    public void setQuantidadePedido(int quantidadePedido) {
+        this.quantidadePedido = quantidadePedido;
     }
 }
 
