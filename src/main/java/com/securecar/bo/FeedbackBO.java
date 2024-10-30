@@ -16,6 +16,11 @@ public class    FeedbackBO {
         return FeedbackDAO.findById(id);
     }
 
+    public ArrayList<FeedbackTO> findByIdUsuario(Long id){
+        FeedbackDAO = new FeedbackDAO();
+        return FeedbackDAO.findByIdUsuario(id);
+    }
+
     public FeedbackTO save(FeedbackTO FeedbackTO){
         FeedbackDAO = new FeedbackDAO();
         return FeedbackDAO.save(FeedbackTO);

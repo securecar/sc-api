@@ -80,7 +80,7 @@ public class EnderecoResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response update(@PathParam("id") Long id , EnderecoTO contato){
+    public Response update(@PathParam("id") Long id , @Valid EnderecoTO contato){
         enderecoBO = new EnderecoBO();
         contato.setIdEndereco(id);
         EnderecoTO resultado = enderecoBO.update(contato);

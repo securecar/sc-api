@@ -19,7 +19,7 @@ public class FeedbackDAO extends Repository{
                     feedback.setIdFeedback(rs.getLong("id_feedback"));
                     feedback.setComentarioFeedback(rs.getString("ds_feedback"));
                     feedback.setEstrelasFeedback(rs.getInt("vl_estrelas_feedback"));
-                    feedback.setIdUsuario(rs.getLong("id_usuario"));
+                    feedback.setIdConserto(rs.getLong("id_conserto"));
                     feedbacks.add(feedback);
                 }
             }
@@ -41,7 +41,7 @@ public class FeedbackDAO extends Repository{
                 feedback.setIdFeedback(rs.getLong("id_feedback"));
                 feedback.setComentarioFeedback(rs.getString("ds_feedback"));
                 feedback.setEstrelasFeedback(rs.getInt("vl_estrelas_feedback"));
-                feedback.setIdUsuario(rs.getLong("id_usuario"));
+                feedback.setIdConserto(rs.getLong("id_conserto"));
                 return feedback;
             }
         }
@@ -53,13 +53,39 @@ public class FeedbackDAO extends Repository{
         return null;
     }
 
+    public ArrayList<FeedbackTO> findByIdUsuario(Long id) {
+        ArrayList<FeedbackTO> feedbacks = new ArrayList<>();
+        String sql = "SELECT f.* " +
+                "FROM t_securecar_feedback f " +
+                "JOIN t_securecar_conserto c ON f.id_conserto = c.id_conserto " +
+                "JOIN t_securecar_usuario u ON c.id_usuario = u.id_usuario " +
+                "WHERE u.id_usuario = ?";
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                FeedbackTO feedback = new FeedbackTO();
+                feedback.setIdFeedback(rs.getLong("id_feedback"));
+                feedback.setComentarioFeedback(rs.getString("ds_feedback"));
+                feedback.setEstrelasFeedback(rs.getInt("vl_estrelas_feedback"));
+                feedback.setIdConserto(rs.getLong("id_conserto"));
+                feedbacks.add(feedback);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro de sql! " + e.getMessage());
+        } finally {
+            closeConnection();
+        }
+        return feedbacks;
+    }
+
     public FeedbackTO save(FeedbackTO feedback){
-        String sql = "insert into t_securecar_feedback (DS_FEEDBACK, VL_ESTRELAS_FEEDBACK, ID_USUARIO) values (?, ?, " +
+        String sql = "insert into t_securecar_feedback (DS_FEEDBACK, VL_ESTRELAS_FEEDBACK, ID_CONSERTO) values (?, ?, " +
                 "?)";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
             ps.setString(1, feedback.getComentarioFeedback());
             ps.setInt(2, feedback.getEstrelasFeedback());
-            ps.setLong(3, feedback.getIdUsuario());
+            ps.setLong(3, feedback.getIdConserto());
             if (ps.executeUpdate() > 0){
                 return feedback;
             }

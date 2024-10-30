@@ -1,9 +1,7 @@
 package com.securecar.to;
 
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
@@ -13,11 +11,13 @@ public class ConsertoTO {
     private LocalDate dataConserto;
     @NotBlank
     private String descricaoConserto;
-    @NotNull
-    @Positive
+    @PositiveOrZero
     private double valorConserto;
     @NotNull
     private Long idUsuario;
+
+    @Nullable
+    private Double valorTotalConserto;
 
     public ConsertoTO() {
     }
@@ -60,5 +60,14 @@ public class ConsertoTO {
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    @Nullable
+    public Double getValorTotalConserto() {
+        return valorTotalConserto;
+    }
+
+    public void setValorTotalConserto(@Nullable Double valorTotalConserto) {
+        this.valorTotalConserto = valorTotalConserto;
     }
 }

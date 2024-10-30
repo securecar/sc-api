@@ -4,6 +4,7 @@ import com.securecar.bo.PecaConsertoBO;
 import com.securecar.bo.PecaBO;
 import com.securecar.to.PecaConsertoTO;
 import com.securecar.to.PecaTO;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -34,9 +35,25 @@ public class PecaConsertoResource {
 
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findAll(){
+        pecaConsertoBO = new PecaConsertoBO();
+        ArrayList<PecaConsertoTO> resultado = pecaConsertoBO.findAll();
+        Response.ResponseBuilder response = null;
+        if (resultado != null){
+            response = Response.ok();
+        }
+        else{
+            response = Response.status(404);
+        }
+        response.entity(resultado);
+        return response.build();
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response save(PecaConsertoTO pecaConserto){
+    public Response save(@Valid PecaConsertoTO pecaConserto){
         pecaConsertoBO = new PecaConsertoBO();
         PecaConsertoTO resultado = pecaConsertoBO.save(pecaConserto);
         Response.ResponseBuilder response = null;

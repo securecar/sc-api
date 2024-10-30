@@ -1,6 +1,7 @@
 package com.securecar.dao;
 
 import com.securecar.to.SeguroUnidadeTO;
+import com.securecar.to.SeguroUnidadeTO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,7 @@ public class SeguroUnidadeDAO extends Repository{
             if (rs != null){
                 while (rs.next()){
                     SeguroUnidadeTO seguroUnidade = new SeguroUnidadeTO();
+                    seguroUnidade.setIdUnidade(rs.getLong("id_unidade"));
                     seguroUnidade.setIdSeguro(rs.getLong("id_seguro"));
                     seguroUnidade.setNomeUnidade(rs.getString("nm_unidade"));
                     seguroUnidade.setIdContato(rs.getLong("id_contato"));
@@ -31,6 +33,34 @@ public class SeguroUnidadeDAO extends Repository{
         return seguroUnidades;
     }
 
+    public ArrayList<SeguroUnidadeTO> findAllByIdSeguro(Long idSeguro) {
+        ArrayList<SeguroUnidadeTO> seguroUnidades = new ArrayList<>();
+        String sql = "select * from T_SECURECAR_SEGURO_UNIDADE su " +
+                "inner join T_SECURECAR_SEGURO s on su.ID_SEGURO = s.ID_SEGURO " +
+                "where su.ID_SEGURO = ? " +
+                "order by su.ID_UNIDADE";
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+            ps.setLong(1, idSeguro); // Adiciona o parâmetro idSeguro
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    SeguroUnidadeTO seguroUnidade = new SeguroUnidadeTO();
+                    seguroUnidade.setIdSeguro(rs.getLong("id_seguro"));
+                    seguroUnidade.setNomeUnidade(rs.getString("nm_unidade"));
+                    seguroUnidade.setIdEndereco(rs.getLong("id_endereco"));
+                    seguroUnidade.setIdContato(rs.getLong("id_contato"));
+                    seguroUnidade.setIdUnidade(rs.getLong("id_unidade"));
+                    seguroUnidades.add(seguroUnidade);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao ler os seguroUnidades: " + e.getMessage());
+        } finally {
+            closeConnection();
+        }
+        return seguroUnidades;
+    }
+
     public SeguroUnidadeTO findById(Long id){
         String sql = "select * from T_SECURECAR_SEGURO_UNIDADE where ID_UNIDADE = ?";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
@@ -38,7 +68,7 @@ public class SeguroUnidadeDAO extends Repository{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 SeguroUnidadeTO seguroUnidade = new SeguroUnidadeTO();
-                seguroUnidade.setIdSeguro(rs.getLong("id_seguro"));
+                seguroUnidade.setIdSeguro(rs.getLong("id_seguroUnidade"));
                 seguroUnidade.setNomeUnidade(rs.getString("nm_unidade"));
                 seguroUnidade.setIdContato(rs.getLong("id_contato"));
                 seguroUnidade.setIdEndereco(rs.getLong("id_endereco"));

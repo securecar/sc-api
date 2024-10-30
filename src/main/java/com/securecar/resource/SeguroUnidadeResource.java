@@ -8,21 +8,30 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 
+@Path("/seguro-unidade")
 public class SeguroUnidadeResource {
     SeguroUnidadeBO seguroUnidadeBO;
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findAll(){
+    public Response findAll(@QueryParam("id_seguro") Long idSeguro) {
         seguroUnidadeBO = new SeguroUnidadeBO();
-        ArrayList<SeguroUnidadeTO> resultado = seguroUnidadeBO.findAll();
+        ArrayList<SeguroUnidadeTO> resultado = null;
         Response.ResponseBuilder response = null;
-        if (resultado != null){
-            response = Response.ok();
+        if (idSeguro != null && idSeguro > 0) {
+            resultado = seguroUnidadeBO.findAllByIdSeguro(idSeguro);
+            if (resultado != null) {
+                response = Response.ok(resultado);
+            } else {
+                response = Response.status(404);
+            }
+        } else {
+            resultado = seguroUnidadeBO.findAll();
+            if (resultado != null) {
+                response = Response.ok(resultado);
+            } else {
+                response = Response.status(404);
+            }
         }
-        else{
-            response = Response.status(404);
-        }
-        response.entity(resultado);
         return response.build();
     }
 

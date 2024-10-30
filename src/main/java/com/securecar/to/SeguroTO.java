@@ -1,10 +1,18 @@
 package com.securecar.to;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.br.CNPJ;
+
 public class SeguroTO {
     private Long idSeguro;
-    private Long cnpj;
+    @CNPJ(message = "CNPJ inválido, faz o L")
+    private String cnpj;
+    @NotBlank(message = "Seguro tem que ter nome.")
     private String nomeSeguro;
-    private int incriscaoEstadual;
+
+    @NotNull(message = "Seguro tem que ter inscrição estadual")
+    private String inscricaoEstadual;
 
     public SeguroTO() {
     }
@@ -17,11 +25,11 @@ public class SeguroTO {
         this.idSeguro = idSeguro;
     }
 
-    public Long getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(Long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -33,12 +41,11 @@ public class SeguroTO {
         this.nomeSeguro = nomeSeguro;
     }
 
-    public int getIncriscaoEstadual() {
-        return incriscaoEstadual;
+    public String getInscricaoEstadual() {
+        return inscricaoEstadual;
     }
 
-    public void setIncriscaoEstadual(int incriscaoEstadual) {
-        this.incriscaoEstadual = incriscaoEstadual;
+    public void setInscricaoEstadual(String inscricaoEstadual) {
+        this.inscricaoEstadual = inscricaoEstadual;
     }
-
 }
