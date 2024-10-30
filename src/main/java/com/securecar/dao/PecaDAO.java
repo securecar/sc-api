@@ -55,7 +55,10 @@ public class PecaDAO extends Repository{
 
     public ArrayList<PecaTO> findAllByIdConserto(Long idConserto){
         ArrayList<PecaTO> resultado = new ArrayList<>();
-        String sql = "select b.vl_peca,b.ds_peca from t_securecar_peca_conserto a inner join t_securecar_peca b on (a.id_peca = b.id_peca) where a.id_conserto = ?";
+        String sql = "select b.ID_PECA, b.vl_peca,b.ds_peca from t_securecar_peca_conserto a inner " +
+                "join " +
+                "t_securecar_peca b " +
+                "on (a.id_peca = b.id_peca) where a.id_conserto = ? order by b.ID_PECA";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
             ps.setLong(1, idConserto);
             ResultSet rs = ps.executeQuery();
@@ -65,7 +68,6 @@ public class PecaDAO extends Repository{
                     peca.setIdPeca(rs.getLong(1));
                     peca.setValorPeca(rs.getDouble("vl_peca"));
                     peca.setDescricaoPeca(rs.getString("ds_peca"));
-                    peca.setQuantidadePeca(rs.getInt("qt_peca"));
                     resultado.add(peca);
                 }
             }

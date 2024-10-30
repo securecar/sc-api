@@ -10,26 +10,12 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 
+
+
+
+@Path("/peca-conserto")
 public class PecaConsertoResource {
     PecaConsertoBO pecaConsertoBO;
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response findAll(){
-        pecaConsertoBO = new PecaConsertoBO();
-        ArrayList<PecaConsertoTO> resultado = pecaConsertoBO.findAll();
-        Response.ResponseBuilder response = null;
-        if (resultado != null){
-            response = Response.ok();
-        }
-        else{
-            response = Response.status(404);
-        }
-
-        response.entity(resultado);
-        return response.build();
-    }
-
-
 
     @GET
     @Path("/{id}/pecas")
