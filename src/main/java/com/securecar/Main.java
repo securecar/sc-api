@@ -1,5 +1,6 @@
 package com.securecar;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -35,6 +36,13 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
+        Dotenv dotenv = Dotenv.load();
+
+        System.setProperty("DB_URL", dotenv.get("DB_URL"));
+        System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
+        System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+        System.setProperty("DB_DRIVER", dotenv.get("DB_DRIVER"));
+
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started with endpoints available at "
                 + "%s%nHit Ctrl-C to stop it...", BASE_URI));

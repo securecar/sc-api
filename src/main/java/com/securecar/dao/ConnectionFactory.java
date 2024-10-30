@@ -1,12 +1,8 @@
 package com.securecar.dao;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class ConnectionFactory {
     public static ConnectionFactory instance;
@@ -17,7 +13,6 @@ public class ConnectionFactory {
     private String pass;
     private String driver;
 
-
     public ConnectionFactory(String url, String user, String pass, String driver) {
         this.url = url;
         this.user = user;
@@ -25,55 +20,43 @@ public class ConnectionFactory {
         this.driver = driver;
     }
 
-    public static ConnectionFactory getInstance(){
+    public static ConnectionFactory getInstance() {
         ConnectionFactory result = instance;
-        if (result != null){
+        if (result != null) {
             return result;
         }
-        Properties prop = new Properties();
-        FileInputStream file = null;
-        try{
-            file = new FileInputStream("./src/main/resources/application.properties");
-            prop.load(file);
-            String url = prop.getProperty("datasource.url");
-            String user = prop.getProperty("datasource.username");
-            String pass = prop.getProperty("datasource.password");
-            String driver = prop.getProperty("datasource.driver-class-name");
-            file.close();
-            if (instance == null){
-                instance = new ConnectionFactory(url, user, pass, driver);
-            }
-            return instance;
-        } catch (FileNotFoundException e ) {
-            System.out.println("Erro (FileNotFoundException): " + e.getMessage());
-        } catch (IOException e){
-            System.out.println("Erro (IOException): " + e.getMessage());
+
+        String url = System.getProperty("DB_URL");
+        String user = System.getProperty("DB_USERNAME");
+        String pass = System.getProperty("DB_PASSWORD");
+        String driver = System.getProperty("DB_DRIVER");
+
+        if (instance == null) {
+            instance = new ConnectionFactory(url, user, pass, driver);
         }
-        return null;
+        return instance;
     }
 
-
-
     public Connection getConexao() {
-        try{
-            if (this.conexao != null && !this.conexao.isClosed()){
+        try {
+            if (this.conexao != null && !this.conexao.isClosed()) {
                 return this.conexao;
             }
-            if(this.getDriver() == null || this.getDriver().isEmpty()){
+            if (this.getDriver() == null || this.getDriver().isEmpty()) {
                 throw new ClassNotFoundException("Nome da classe nulo ou em branco");
             }
-            if(this.getUrl() == null || this.getUrl().isEmpty()){
+            if (this.getUrl() == null || this.getUrl().isEmpty()) {
                 throw new SQLException("URL de conexão nulo ou em branco");
             }
-            if (this.getUser() == null || this.getUser().isEmpty()){
+            if (this.getUser() == null || this.getUser().isEmpty()) {
                 throw new SQLException("Usuário de conexão nulo ou em branco");
             }
             Class.forName(this.getDriver());
             this.conexao = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Erro de sql: " + e.getMessage());
             System.exit(1);
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             System.out.println("Erro nome da classe: " + e.getMessage());
             System.exit(1);
         }
