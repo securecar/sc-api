@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 
@@ -17,18 +18,17 @@ public class UsuarioTO {
 
     private LocalDate dataCriacaoConta;
 
-    @Size(min = 11, message = "Tamanho do CPF inválido!")
-    @NotNull
-    private Long cpf;
+    @CPF
+    private String cpf;
 
     @NotEmpty
     private String senha;
 
     @NotEmpty
     private String genero;
-    @Size(min = 9, message = "Tamanho do RG inválido!")
+    @Size(min = 9, max = 9, message = "RG inválido!")
     @NotNull
-    private int rg;
+    private String rg;
 
     @NotNull
     private Long idContato;
@@ -63,13 +63,7 @@ public class UsuarioTO {
         this.dataCriacaoConta = dataCriacaoConta;
     }
 
-    public Long getCpf() {
-        return cpf;
-    }
 
-    public void setCpf(Long cpf) {
-        this.cpf = cpf;
-    }
 
     public String getSenha() {
         return senha;
@@ -87,13 +81,6 @@ public class UsuarioTO {
         this.genero = genero;
     }
 
-    public int getRg() {
-        return rg;
-    }
-
-    public void setRg(int rg) {
-        this.rg = rg;
-    }
 
     public Long getIdContato() {
         return idContato;
@@ -109,5 +96,21 @@ public class UsuarioTO {
 
     public void setIdEndereco(Long idEndereco) {
         this.idEndereco = idEndereco;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 }

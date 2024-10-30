@@ -5,10 +5,10 @@ import com.securecar.to.ContatoTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import oracle.jdbc.proxy.annotation.Post;
 
 import java.util.ArrayList;
 
+@Path("/contato")
 public class ContatoResource {
     ContatoBO contatoBO;
 
@@ -45,8 +45,9 @@ public class ContatoResource {
         return response.build();
     }
 
-    @Post
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response save(ContatoTO contato){
         contatoBO = new ContatoBO();
         ContatoTO resultado = contatoBO.save(contato);

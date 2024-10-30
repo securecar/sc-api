@@ -8,7 +8,9 @@ public class EnderecoTO {
     private Long idEndereco;
 
 //    @Size(min = 9, max = 9, message = "Cep inválido!")
-    private int cep;
+
+    @Size(min = 8, max = 8, message = "Cep inválido!")
+    private String cep;
     @NotBlank
     private String nomeLogradouro;
 
@@ -41,11 +43,11 @@ public class EnderecoTO {
         this.idEndereco = idEndereco;
     }
 
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 

@@ -12,14 +12,14 @@ import java.util.ArrayList;
 public class EnderecoDAO extends Repository{
     public ArrayList<EnderecoTO> findAll(){
         ArrayList<EnderecoTO> enderecos = new ArrayList<>();
-        String sql = "select * from t_securecar_endereco";
+        String sql = "select * from t_securecar_endereco order by ID_ENDERECO";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             if (rs != null){
                 while (rs.next()){
                     EnderecoTO endereco = new EnderecoTO();
                     endereco.setIdEndereco(rs.getLong("id_endereco"));
-                    endereco.setCep(rs.getInt("nr_cep"));
+                    endereco.setCep(rs.getString("nr_cep"));
                     endereco.setNomeLogradouro(rs.getString("nm_logradouro"));
                     endereco.setNumeroLogradouro(rs.getInt("nr_logradouro"));
                     endereco.setComplemento(rs.getString("cp_logradouro"));
@@ -44,7 +44,7 @@ public class EnderecoDAO extends Repository{
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 EnderecoTO endereco = new EnderecoTO();
-                endereco.setCep(rs.getInt("nr_cep"));
+                endereco.setCep(rs.getString("nr_cep"));
                 endereco.setNomeLogradouro(rs.getString("nm_logradouro"));
                 endereco.setNumeroLogradouro(rs.getInt("nr_logradouro"));
                 endereco.setComplemento(rs.getString("cp_logradouro"));
@@ -67,13 +67,13 @@ public class EnderecoDAO extends Repository{
         String sql = "insert into t_securecar_endereco (NR_CEP, NM_LOGRADOURO, NR_LOGRADOURO, CP_LOGRADOURO, " +
                 "NM_BAIRRO, NM_UF, NM_CIDADE) values (?, ?, ?, ?, ?, ?, ?)";
         try(PreparedStatement ps = getConnection().prepareStatement(sql,new String[]{"ID_ENDERECO"})){
-            ps.setInt(1, endereco.getCep());
+            ps.setString(1, endereco.getCep());
             ps.setString(2, endereco.getNomeLogradouro());
             ps.setInt(3, endereco.getNumeroLogradouro());
             ps.setString(4, endereco.getComplemento());
             ps.setString(5, endereco.getBairro());
             ps.setString(6, endereco.getUf());
-            ps.setString(7, endereco.getCidade()); // Adicionando o parâmetro faltante
+            ps.setString(7, endereco.getCidade());
 
 
             if (ps.executeUpdate() > 0) {
