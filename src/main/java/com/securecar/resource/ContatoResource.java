@@ -2,6 +2,7 @@ package com.securecar.resource;
 
 import com.securecar.bo.ContatoBO;
 import com.securecar.to.ContatoTO;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -48,7 +49,7 @@ public class ContatoResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response save(ContatoTO contato){
+    public Response save(@Valid ContatoTO contato){
         contatoBO = new ContatoBO();
         ContatoTO resultado = contatoBO.save(contato);
         Response.ResponseBuilder response = null;
@@ -79,7 +80,7 @@ public class ContatoResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response update(@PathParam("id") Long id , ContatoTO contato){
+    public Response update(@PathParam("id") Long id , @Valid ContatoTO contato){
         contatoBO = new ContatoBO();
         contato.setIdContato(id);
         ContatoTO resultado = contatoBO.update(contato);

@@ -12,6 +12,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 
+@Path("/seguro")
 public class SeguroResource {
     SeguroBO seguroBO;
     @GET
@@ -79,7 +80,8 @@ public class SeguroResource {
     @Path("/{id}")
     public Response edit(@PathParam("id") Long id , SeguroTO seguro){
         seguroBO = new SeguroBO();
-        SeguroTO resultado = seguroBO.edit(id, seguro);
+        seguro.setIdSeguro(id);
+        SeguroTO resultado = seguroBO.update(seguro);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();

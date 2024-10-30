@@ -13,6 +13,11 @@ public class CarroBO {
         return CarroDAO.findAll();
     }
 
+    public ArrayList<CarroTO> findAllByIdUsuario(Long idUsuario) {
+        CarroDAO carroDAO = new CarroDAO();
+        return carroDAO.findAllByIdUsuario(idUsuario);
+    }
+
     public CarroTO findById(Long id){
         CarroDAO = new CarroDAO();
         return CarroDAO.findById(id);
@@ -28,8 +33,8 @@ public class CarroBO {
         return CarroDAO.delete(codigo);
     }
 
-    public CarroTO edit(Long id, CarroTO carro){
+    public CarroTO update(CarroTO carro){
         CarroDAO = new CarroDAO();
-        return CarroDAO.edit(id, carro);
+        return CarroDAO.update(carro);
     }
 }

@@ -19,6 +19,8 @@ public class PecaConsertoDAO extends Repository {
                     PecaConsertoTO pecaConserto = new PecaConsertoTO();
                     pecaConserto.setIdConserto(rs.getLong("id_conserto"));
                     pecaConserto.setIdPeca(rs.getLong("id_peca"));
+                    pecaConserto.setIdPecaConserto(rs.getLong("id_peca_conserto" +
+                            ""));
                     pecasConserto.add(pecaConserto);
                 }
             }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ConsertoDAO extends Repository{
     public ArrayList<ConsertoTO> findAll(){
         ArrayList<ConsertoTO> consertos = new ArrayList<>();
-        String sql = "select * from t_securecar_conserto";
+        String sql = "select * from t_securecar_conserto order by ID_CONSERTO, DS_CONSERTO";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             if (rs != null){
@@ -55,7 +55,6 @@ public class ConsertoDAO extends Repository{
         }
         return null;
     }
-
     public ConsertoTO save(ConsertoTO conserto){
         String sql = "insert into t_securecar_conserto (DT_CONSERTO, DS_CONSERTO, VL_CONSERTO, ID_USUARIO) values (?," +
                 " ?, ?, ?)";

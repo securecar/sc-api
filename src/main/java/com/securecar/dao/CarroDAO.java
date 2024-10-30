@@ -23,6 +23,7 @@ public class CarroDAO extends Repository{
                     carro.setChassi(rs.getString("ds_chassi"));
                     carro.setQuilometragem(rs.getDouble("km_carro"));
                     carro.setIdUsuario(rs.getLong("id_usuario"));
+                    carro.setIdSeguro(rs.getLong("id_seguro"));
                     carros.add(carro);
                 }
             }
@@ -34,9 +35,38 @@ public class CarroDAO extends Repository{
         return carros;
     }
 
+    public ArrayList<CarroTO> findAllByIdUsuario(Long idUsuario) {
+        ArrayList<CarroTO> carros = new ArrayList<>();
+        String sql = "SELECT * FROM T_SECURECAR_CARRO WHERE id_usuario = ?";
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+            ps.setLong(1, idUsuario);
+            ResultSet rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    CarroTO carro = new CarroTO();
+                    carro.setIdCarro(rs.getLong("id_carro"));
+                    carro.setModelo(rs.getString("nm_modelo"));
+                    carro.setAno(rs.getInt("nr_ano"));
+                    carro.setPlaca(rs.getString("nr_placa"));
+                    carro.setChassi(rs.getString("ds_chassi"));
+                    carro.setQuilometragem(rs.getDouble("km_carro"));
+                    carro.setIdUsuario(rs.getLong("id_usuario"));
+                    carro.setIdSeguro(rs.getLong("id_seguro"));
+                    carros.add(carro);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao ler os carros: " + e.getMessage());
+        } finally {
+            closeConnection();
+        }
+        return carros;
+    }
+
     public CarroTO findById(Long id){
         String sql = "select * from t_securecar_carro where id_carro = ?";
                 try(PreparedStatement ps = getConnection().prepareStatement(sql)) {
+                    ps.setLong(1, id);
                     ResultSet rs = ps.executeQuery();
                     if (rs.next()){
                         CarroTO carro = new CarroTO();
@@ -58,8 +88,9 @@ public class CarroDAO extends Repository{
     }
 
     public CarroTO save(CarroTO carro){
-        String sql = "insert into t_securecar_carro (NM_MODELO, NR_ANO, NR_PLACA, DS_CHASSI, KM_CARRO, ID_USUARIO) " +
-                "values (?, ?, ?, ?, ?, ?)";
+        String sql = "insert into t_securecar_carro (NM_MODELO, NR_ANO, NR_PLACA, DS_CHASSI, KM_CARRO, ID_USUARIO, " +
+                "ID_SEGURO) " +
+                "values (?, ?, ?, ?, ?, ?, ?)";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)) {
             ps.setString(1, carro.getModelo());
             ps.setInt(2, carro.getAno());
@@ -67,6 +98,7 @@ public class CarroDAO extends Repository{
             ps.setString(4, carro.getChassi());
             ps.setDouble(5, carro.getQuilometragem());
             ps.setLong(6, carro.getIdUsuario());
+            ps.setLong(7, carro.getIdSeguro());
             if(ps.executeUpdate() > 0) {
                 return carro;
             }
@@ -91,14 +123,17 @@ public class CarroDAO extends Repository{
         return false;
     }
 
-    public CarroTO edit(Long id, CarroTO carro) {
-        String sql = "update T_SECURECAR_carro set NM_MODELO = ?, NR_ANO = ?, DS_CHASSI = ?, KM_CARRO  = ? where ID_CARRO = ? ";
+    public CarroTO update(CarroTO carro) {
+        String sql = "update T_SECURECAR_carro set NM_MODELO = ?, NR_ANO = ?, DS_CHASSI = ?, KM_CARRO  = ?, ID_SEGURO" +
+                " = ? where " +
+                "ID_CARRO = ? ";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)) {
-            ps.setLong(5, id);
+            ps.setLong(6, carro.getIdCarro());
             ps.setString(1, carro.getModelo());
             ps.setInt(2, carro.getAno());
             ps.setString(3, carro.getChassi());
             ps.setDouble(4, carro.getQuilometragem());
+            ps.setLong(5, carro.getIdSeguro());
             if(ps.executeUpdate() > 0) {
                 return carro;
             }

@@ -26,8 +26,13 @@ public class SeguroUnidadeBO {
         return seguroUnidadeDAO.delete(codigo);
     }
 
-    public SeguroUnidadeTO update (SeguroUnidadeTO contato){
+    public SeguroUnidadeTO update (SeguroUnidadeTO seguroUnidade){
         seguroUnidadeDAO = new SeguroUnidadeDAO();
-        return seguroUnidadeDAO.update(contato);
+        return seguroUnidadeDAO.update(seguroUnidade);
+    }
+    
+    public ArrayList<SeguroUnidadeTO> findAllByIdSeguro(Long idSeguro){
+        seguroUnidadeDAO = new SeguroUnidadeDAO();
+        return seguroUnidadeDAO.findAllByIdSeguro(idSeguro);
     }
 }

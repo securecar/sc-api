@@ -30,8 +30,8 @@ public class SeguroBO {
         return seguroDAO.delete(codigo);
     }
 
-    public SeguroTO edit (Long id, SeguroTO seguro){
+    public SeguroTO update (SeguroTO seguro){
         seguroDAO = new SeguroDAO();
-        return seguroDAO.edit(id, seguro);
+        return seguroDAO.update(seguro);
     }
 }

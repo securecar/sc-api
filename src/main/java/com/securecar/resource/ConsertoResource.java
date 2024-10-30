@@ -4,6 +4,7 @@ import com.securecar.bo.ConsertoBO;
 import com.securecar.bo.ContatoBO;
 import com.securecar.bo.PecaBO;
 import com.securecar.to.*;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -32,6 +33,7 @@ public class ConsertoResource {
 
     @GET
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") Long id){
         consertoBO = new ConsertoBO();
         ConsertoTO resultado = consertoBO.findById(id);
@@ -47,6 +49,7 @@ public class ConsertoResource {
 
     @GET
     @Path("/{id}/pecas")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response findAllPecas(@PathParam("id") Long id){
         PecaBO pecaBO = new PecaBO();
         ArrayList<PecaTO> resultado = pecaBO.findAllByIdConserto(id);
@@ -64,7 +67,7 @@ public class ConsertoResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response save(ConsertoTO conserto){
+    public Response save(@Valid ConsertoTO conserto){
         consertoBO = new ConsertoBO();
         ConsertoTO resultado = consertoBO.save(conserto);
         Response.ResponseBuilder response = null;
@@ -94,7 +97,7 @@ public class ConsertoResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response update(@PathParam("id") Long id , ConsertoTO conserto){
+    public Response update(@PathParam("id") Long id , @Valid ConsertoTO conserto){
         consertoBO = new ConsertoBO();
         conserto.setIdConserto(id);
         ConsertoTO resultado = consertoBO.update(conserto);
