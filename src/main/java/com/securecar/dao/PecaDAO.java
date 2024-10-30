@@ -53,27 +53,33 @@ public class PecaDAO extends Repository{
         return null;
     }
 
-    public ArrayList<PecaTO> findAllByIdConserto(Long idConserto){
+    public ArrayList<PecaTO> findAllByIdConserto(Long idConserto) {
         ArrayList<PecaTO> resultado = new ArrayList<>();
-        String sql = "select b.ID_PECA, b.vl_peca,b.ds_peca from t_securecar_peca_conserto a inner " +
-                "join " +
-                "t_securecar_peca b " +
-                "on (a.id_peca = b.id_peca) where a.id_conserto = ? order by b.ID_PECA";
-        try(PreparedStatement ps = getConnection().prepareStatement(sql)){
+        String sql = "SELECT b.ID_PECA, b.vl_peca, b.ds_peca, " +
+                "(SELECT COUNT(DISTINCT a.id_peca_conserto) FROM t_securecar_peca_conserto a " +
+                "WHERE a.id_peca = b.id_peca AND a.id_conserto = ?) AS qt_pedido " +
+                "FROM t_securecar_peca b " +
+                "INNER JOIN t_securecar_peca_conserto a ON (a.id_peca = b.id_peca) " +
+                "WHERE a.id_conserto = ? " +
+                "GROUP BY b.ID_PECA, b.vl_peca, b.ds_peca " +
+                "ORDER BY b.ID_PECA";
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
             ps.setLong(1, idConserto);
+            ps.setLong(2, idConserto);
             ResultSet rs = ps.executeQuery();
-            if (rs!=null){
-                while(rs.next()){
+            if (rs != null) {
+                while (rs.next()) {
                     PecaTO peca = new PecaTO();
                     peca.setIdPeca(rs.getLong(1));
                     peca.setValorPeca(rs.getDouble("vl_peca"));
                     peca.setDescricaoPeca(rs.getString("ds_peca"));
+                    peca.setQuantidadePedido(rs.getInt("qt_pedido"));
                     resultado.add(peca);
                 }
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Erro de sql! " + e.getMessage());
-        }finally {
+        } finally {
             closeConnection();
         }
         return resultado;
