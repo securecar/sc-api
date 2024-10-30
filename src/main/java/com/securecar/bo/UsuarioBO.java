@@ -1,6 +1,8 @@
 package com.securecar.bo;
 
+import com.securecar.dao.SeguroUnidadeDAO;
 import com.securecar.dao.UsuarioDAO;
+import com.securecar.to.UsuarioTO;
 import com.securecar.to.UsuarioTO;
 
 import java.util.ArrayList;
@@ -20,5 +22,15 @@ public class UsuarioBO {
     public UsuarioTO save (UsuarioTO usuarioTO){
         usuarioDAO = new UsuarioDAO();
         return usuarioDAO.save(usuarioTO);
+    }
+
+    public boolean delete(Long codigo){
+        usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.delete(codigo);
+    }
+
+    public UsuarioTO update (UsuarioTO contato){
+        usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.update(contato);
     }
 }

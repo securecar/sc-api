@@ -10,6 +10,8 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 
+
+@Path("/conserto")
 public class ConsertoResource {
     ConsertoBO consertoBO;
     @GET

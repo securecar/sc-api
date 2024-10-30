@@ -55,10 +55,16 @@ public class ContatoDAO extends Repository{
 
     public ContatoTO save(ContatoTO contato){
         String sql = "insert into T_SECURECAR_CONTATO(NM_EMAIL, NR_TELEFONE) VALUES (?,?)";
-        try(PreparedStatement ps = getConnection().prepareStatement(sql)){
+        try(PreparedStatement ps = getConnection().prepareStatement(sql, new String[]{"ID_CONTATO"})){
             ps.setString(1, contato.getEmail());
             ps.setLong(2, contato.getTelefone());
             if (ps.executeUpdate() > 0){
+                try(ResultSet rs = ps.getGeneratedKeys()){
+                    if (rs.next()){
+                        contato.setIdContato(rs.getLong(1));
+                    }
+
+                }
                 return contato;
             }
         } catch (SQLException e){
