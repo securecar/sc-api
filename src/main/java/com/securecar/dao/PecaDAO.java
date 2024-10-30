@@ -1,6 +1,7 @@
 package com.securecar.dao;
 
 import com.securecar.to.PecaTO;
+import com.securecar.to.PecaTO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -88,6 +89,37 @@ public class PecaDAO extends Repository{
         } catch (SQLException e) {
             System.out.println("Erro de sql! " + e.getMessage());
         }finally {
+            closeConnection();
+        }
+        return null;
+    }
+
+    public boolean delete (Long codigo){
+        String sql = "delete T_SECURECAR_PECA where ID_PECA = ?";
+        try(PreparedStatement ps = getConnection().prepareStatement(sql)){
+            ps.setLong(1,codigo);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Erro ao editar: " + e.getMessage());
+        } finally {
+            closeConnection();
+        }
+        return false;
+    }
+
+    public PecaTO update(PecaTO peca){
+        String sql = "update T_SECURECAR_peca set DS_PECA = ?, QT_PECA = ?, VL_PECA = ? where ID_PECA = ?";
+        try(PreparedStatement ps = getConnection().prepareStatement(sql)){
+            ps.setLong(4, peca.getIdPeca());
+            ps.setString(1, peca.getDescricaoPeca());
+            ps.setInt(2, peca.getQuantidadePeca());
+            ps.setDouble(3, peca.getValorPeca());
+            if (ps.executeUpdate() > 0){
+                return peca;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao editar: " + e.getMessage());
+        } finally {
             closeConnection();
         }
         return null;

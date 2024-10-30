@@ -1,24 +1,22 @@
 package com.securecar.resource;
 
-import com.securecar.bo.ConsertoBO;
-import com.securecar.bo.ContatoBO;
+import com.securecar.bo.PecaConsertoBO;
 import com.securecar.bo.PecaBO;
-import com.securecar.to.*;
+import com.securecar.to.PecaConsertoTO;
+import com.securecar.to.PecaTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 
-
-@Path("/conserto")
-public class ConsertoResource {
-    ConsertoBO consertoBO;
+public class PecaConsertoResource {
+    PecaConsertoBO pecaConsertoBO;
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll(){
-        consertoBO = new ConsertoBO();
-        ArrayList<ConsertoTO> resultado = consertoBO.findAll();
+        pecaConsertoBO = new PecaConsertoBO();
+        ArrayList<PecaConsertoTO> resultado = pecaConsertoBO.findAll();
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.ok();
@@ -26,24 +24,12 @@ public class ConsertoResource {
         else{
             response = Response.status(404);
         }
+
         response.entity(resultado);
         return response.build();
     }
 
-    @GET
-    @Path("/{id}")
-    public Response findById(@PathParam("id") Long id){
-        consertoBO = new ConsertoBO();
-        ConsertoTO resultado = consertoBO.findById(id);
-        Response.ResponseBuilder response = null;
-        if (resultado != null){
-            response = Response.ok();
-        }else {
-            response = Response.status(404);
-        }
-        response.entity(resultado);
-        return response.build();
-    }
+
 
     @GET
     @Path("/{id}/pecas")
@@ -64,9 +50,9 @@ public class ConsertoResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response save(ConsertoTO conserto){
-        consertoBO = new ConsertoBO();
-        ConsertoTO resultado = consertoBO.save(conserto);
+    public Response save(PecaConsertoTO pecaConserto){
+        pecaConsertoBO = new PecaConsertoBO();
+        PecaConsertoTO resultado = pecaConsertoBO.save(pecaConserto);
         Response.ResponseBuilder response = null;
         if (resultado != null){
             response = Response.created(null);
@@ -80,9 +66,9 @@ public class ConsertoResource {
     @DELETE
     @Path("/{id}")
     public Response delete (@PathParam("id") Long id){
-        consertoBO = new ConsertoBO();
+        pecaConsertoBO = new PecaConsertoBO();
         Response.ResponseBuilder response = null;
-        if (consertoBO.delete(id)){
+        if (pecaConsertoBO.delete(id)){
             response = Response.status(204);
         }
         else{
@@ -91,21 +77,4 @@ public class ConsertoResource {
         return response.build();
     }
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/{id}")
-    public Response update(@PathParam("id") Long id , ConsertoTO conserto){
-        consertoBO = new ConsertoBO();
-        conserto.setIdConserto(id);
-        ConsertoTO resultado = consertoBO.update(conserto);
-        Response.ResponseBuilder response = null;
-        if (resultado != null){
-            response = Response.created(null);
-        }
-        else{
-            response = Response.status(400);
-        }
-        response.entity(resultado);
-        return response.build();
-    }
 }
