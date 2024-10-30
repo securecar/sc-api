@@ -44,7 +44,7 @@ public class SeguroDAO extends Repository{
                 seguro.setIdSeguro(rs.getLong("id_seguro"));
                 seguro.setCnpj(rs.getString("nr_cnpj"));
                 seguro.setNomeSeguro(rs.getString("nm_seguro"));
-                seguro.setInscricaoEstadual(rs.getString("nr_insc_estadual "));
+                seguro.setInscricaoEstadual(rs.getString("nr_insc_estadual"));
             }
 
 

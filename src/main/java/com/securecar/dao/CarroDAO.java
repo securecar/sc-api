@@ -77,6 +77,7 @@ public class CarroDAO extends Repository{
                         carro.setChassi(rs.getString("ds_chassi"));
                         carro.setQuilometragem(rs.getDouble("km_carro"));
                         carro.setIdUsuario(rs.getLong("id_usuario"));
+                        carro.setIdSeguro(rs.getLong("id_seguro"));
                         return carro;
                     }
                 } catch (SQLException e) {
