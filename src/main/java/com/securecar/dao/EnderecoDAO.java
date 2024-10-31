@@ -107,7 +107,7 @@ public class EnderecoDAO extends Repository{
 
     public EnderecoTO update(EnderecoTO endereco){
         String sql = "update T_SECURECAR_endereco set NM_LOGRADOURO=?, NR_LOGRADOURO=?, CP_LOGRADOURO=?, NM_BAIRRO=?," +
-                "NM_CIDADE=?, nm_uf = ? where ID_endereco = ?";
+                "NM_CIDADE=?, nm_uf = ?, NR_CEP = ? where ID_endereco = ?";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
             ps.setString(1, endereco.getNomeLogradouro());
             ps.setInt(2, endereco.getNumeroLogradouro());
@@ -115,7 +115,8 @@ public class EnderecoDAO extends Repository{
             ps.setString(4, endereco.getBairro());
             ps.setString(5, endereco.getCidade());
             ps.setString(6, endereco.getUf());
-            ps.setLong(7, endereco.getIdEndereco());
+            ps.setString(7, endereco.getCep());
+            ps.setLong(8, endereco.getIdEndereco());
             if (ps.executeUpdate() > 0){
                 return endereco;
             }
