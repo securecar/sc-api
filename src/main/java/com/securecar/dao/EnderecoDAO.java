@@ -51,7 +51,7 @@ public class EnderecoDAO extends Repository{
                 endereco.setBairro(rs.getString("nm_bairro"));
                 endereco.setCidade(rs.getString("nm_cidade"));
                 endereco.setIdEndereco(rs.getLong("id_endereco"));
-                endereco.setUf("nm_uf");
+                endereco.setUf(rs.getString("nm_uf"));
                 return endereco;
             }
         }
