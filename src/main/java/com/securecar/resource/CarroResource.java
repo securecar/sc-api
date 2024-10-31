@@ -31,12 +31,12 @@ public class CarroResource {
         }
 
         if (resultado != null && !resultado.isEmpty()) {
-            response = Response.ok(resultado);
+            response = Response.ok();
         } else {
             response = Response.status(404);
         }
 
-        return response.build();
+        return response.entity(resultado).build();
     }
 
     @GET
