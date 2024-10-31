@@ -18,9 +18,10 @@ public class EnderecoTO {
 //    @Size(max = 4, message = "Número de logradouro deve ter no máximo 4 números")
     private int numeroLogradouro;
 
-    @NotBlank
+
     @Size(max = 150, message = "Complemento muito grande!")
     private String complemento;
+
 
 
     @NotBlank

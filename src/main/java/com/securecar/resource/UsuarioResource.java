@@ -5,6 +5,7 @@ import com.securecar.bo.UsuarioBO;
 import com.securecar.bo.UsuarioBO;
 import com.securecar.to.UsuarioTO;
 import com.securecar.to.UsuarioTO;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -48,7 +49,7 @@ public class UsuarioResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response save(UsuarioTO usuarioTO){
+    public Response save(@Valid UsuarioTO usuarioTO){
         usuarioBO = new UsuarioBO();
         UsuarioTO resultado = usuarioBO.save(usuarioTO);
         Response.ResponseBuilder response = null;
@@ -79,7 +80,7 @@ public class UsuarioResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response update(@PathParam("id") Long id , UsuarioTO usuario){
+    public Response update(@PathParam("id") Long id , @Valid UsuarioTO usuario){
         usuarioBO = new UsuarioBO();
         usuario.setIdUsuario(id);
         UsuarioTO resultado = usuarioBO.update(usuario);

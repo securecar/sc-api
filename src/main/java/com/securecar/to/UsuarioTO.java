@@ -18,22 +18,20 @@ public class UsuarioTO {
 
     private LocalDate dataCriacaoConta;
 
-    @CPF
+    @CPF(message = "CPF inválido!")
     private String cpf;
 
-    @NotEmpty
+    @NotEmpty(message = "Senha não pode estar vazia")
     private String senha;
 
-    @NotEmpty
     private String genero;
     @Size(min = 9, max = 9, message = "RG inválido!")
-    @NotNull
     private String rg;
 
-    @NotNull
+    @NotNull(message = "Usuário tem que ter um contato!")
     private Long idContato;
 
-    @NotNull
+    @NotNull(message = "Usuário tem que ter um contato!")
     private Long idEndereco;
 
     public UsuarioTO() {
