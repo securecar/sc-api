@@ -19,6 +19,7 @@ public class EnderecoTO {
     private int numeroLogradouro;
 
 
+
     @Size(max = 150, message = "Complemento muito grande!")
     private String complemento;
 
