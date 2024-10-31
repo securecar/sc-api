@@ -10,16 +10,16 @@ import java.util.ArrayList;
 public class FeedbackDAO extends Repository{
     public ArrayList<FeedbackTO> findAll(){
         ArrayList<FeedbackTO> feedbacks = new ArrayList<>();
-        String sql = "select * from t_securecar_feedback";
+        String sql = "select * from t_securecar_feedback order by ID_FEEDBACK";
         try(PreparedStatement ps = getConnection().prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             if (rs != null){
                 while (rs.next()){
                     FeedbackTO feedback = new FeedbackTO();
+                    feedback.setIdConserto(rs.getLong("id_conserto"));
                     feedback.setIdFeedback(rs.getLong("id_feedback"));
                     feedback.setComentarioFeedback(rs.getString("ds_feedback"));
-                    feedback.setEstrelasFeedback(rs.getInt("vl_estrelas_feedback"));
-                    feedback.setIdConserto(rs.getLong("id_conserto"));
+                    feedback.setEstrelasFeedback(Integer.valueOf(rs.getInt("vl_estrelas_feedback")));
                     feedbacks.add(feedback);
                 }
             }

@@ -21,26 +21,20 @@ public class FeedbackResource {
         feedbackBO = new FeedbackBO();
         ArrayList<FeedbackTO> resultado = null;
         Response.ResponseBuilder response = null;
-        if (idUsuario > 0){
+        if (idUsuario != null && idUsuario > 0) {
             resultado = feedbackBO.findByIdUsuario(idUsuario);
-            if (resultado!=null){
-                response = Response.ok();
-
-            }
-            else{
-                response = Response.status(404);
-            }
+        } else {
+            resultado = feedbackBO.findAll();
         }
 
-        resultado = feedbackBO.findAll();
-        if (resultado != null){
+        if (resultado != null && !resultado.isEmpty()) {
             response = Response.ok();
-        }
-        else{
+        } else {
             response = Response.status(404);
         }
-        response.entity(resultado);
-        return response.build();
+
+
+        return response.entity(resultado).build();
 
 
 
