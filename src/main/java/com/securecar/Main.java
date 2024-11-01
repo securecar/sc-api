@@ -36,18 +36,44 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        Dotenv dotenv = Dotenv.load();
-
-        System.setProperty("DB_URL", dotenv.get("DB_URL"));
-        System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
-        System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
-        System.setProperty("DB_DRIVER", dotenv.get("DB_DRIVER"));
-
+        // Carrega variáveis de ambiente
+        String dbUrl = System.getenv("DB_URL");
+        String dbUsername = System.getenv("DB_USERNAME");
+        String dbPassword = System.getenv("DB_PASSWORD");
+        String dbDriver = System.getenv("DB_DRIVER");
+    
+        if (dbUrl == null || dbUsername == null || dbPassword == null || dbDriver == null) {
+            Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+            if (dbUrl == null) {
+                dbUrl = dotenv.get("DB_URL");
+            }
+            if (dbUsername == null) {
+                dbUsername = dotenv.get("DB_USERNAME");
+            }
+            if (dbPassword == null) {
+                dbPassword = dotenv.get("DB_PASSWORD");
+            }
+            if (dbDriver == null){
+                dbDriver = dotenv.get("DB_DRIVER");
+            }
+        }
+    
+        // Define propriedades do sistema
+        System.setProperty("DB_URL", dbUrl);
+        System.setProperty("DB_USERNAME", dbUsername);
+        System.setProperty("DB_PASSWORD", dbPassword);
+        System.setProperty("DB_DRIVER", dbDriver);
+    
+        // Inicia o servidor
         final HttpServer server = startServer();
-        System.out.println(String.format("Jersey app started with endpoints available at "
-                + "%s%nHit Ctrl-C to stop it...", BASE_URI));
-        System.in.read();
-        server.stop();
+        System.out.println(String.format("Jersey app started at %s\nPress Ctrl+C to stop...", BASE_URI));
+    
+        // Mantém o servidor rodando até que o processo seja interrompido
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            System.err.println("Servidor interrompido: " + e.getMessage());
+        }
     }
 }
 

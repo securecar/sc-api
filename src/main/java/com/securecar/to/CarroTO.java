@@ -1,25 +1,25 @@
 package com.securecar.to;
 
 import jakarta.validation.constraints.*;
+import jakarta.ws.rs.DefaultValue;
 
 import java.time.Year;
 
 public class CarroTO {
     private Long idCarro;
-    @NotNull
+    @NotNull(message = "Modelo não pode estar vazio!")
     private String modelo;
 
     private int ano;
-    @NotBlank
+    @NotBlank(message = "Placa tem que estar preenchida!")
     private String placa;
-    @NotBlank
+    @NotBlank(message = "Chassi tem que estar preenchido!")
     private String chassi;
-    @PositiveOrZero
+    @PositiveOrZero(message = "Quilometragem não pode ser negativa!")
     private Double quilometragem;
-    @NotNull
+    @NotNull(message = "O carro tem que pertencer a um usuário!")
     private Long idUsuario;
-    @Null
-    private Long idSeguro;
+//    @Null(message = "Você não precisa ter seguro para ter um carro!")
 
     public CarroTO() {
     }
@@ -80,11 +80,5 @@ public class CarroTO {
         this.idUsuario = idUsuario;
     }
 
-    public Long getIdSeguro() {
-        return idSeguro;
-    }
 
-    public void setIdSeguro(Long idSeguro) {
-        this.idSeguro = idSeguro;
-    }
 }
