@@ -9,7 +9,10 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:21-jdk-slim
 
-EXPOSE 8080
+# Use a porta 8080 como padrão se PORT não estiver definido
+ENV PORT 8080
+
+EXPOSE ${PORT}
 
 COPY --from=build /target/sc-api-1.0.jar app.jar
 
