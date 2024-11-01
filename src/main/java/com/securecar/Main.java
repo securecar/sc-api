@@ -2,6 +2,7 @@ package com.securecar;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.jackson.JacksonFeature; // Import necessário
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -21,7 +22,9 @@ public class Main {
      */
     public static HttpServer startServer() {
         // Cria uma configuração de recursos que escaneia por recursos JAX-RS e provedores no pacote com.securecar.resource
-        final ResourceConfig rc = new ResourceConfig().packages("com.securecar.resource");
+        final ResourceConfig rc = new ResourceConfig()
+                .packages("com.securecar.resource")
+                .register(JacksonFeature.class); // Registra o Jackson
 
         // Cria e inicia uma nova instância do servidor HTTP Grizzly
         // Expondo a aplicação Jersey no BASE_URI
