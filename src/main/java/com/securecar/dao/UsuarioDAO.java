@@ -43,12 +43,7 @@ public class UsuarioDAO extends Repository {
 
     public UsuarioTO findById(Long id){
         UsuarioTO usuario = new UsuarioTO();
-        String sql = "select ID_USUARIO, NM_USUARIO, DS_GENERO, NR_RG, DS_SENHA, TO_CHAR(DT_CRIACAO_CONTA, 'DD-MM-YYYY'), " +
-                "NR_CPF, " +
-                "ID_ENDERECO, ID_CONTATO from " +
-                "T_SECURECAR_USUARIO where" +
-                " " +
-                "ID_USUARIO = ?";
+        String sql = "select * from T_SECURECAR_USUARIO where ID_USUARIO = ?";
         try (PreparedStatement ps = getConnection().prepareStatement(sql)){
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
