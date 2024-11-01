@@ -80,7 +80,7 @@ public class UsuarioResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response update(@PathParam("id") Long id , @Valid UsuarioTO usuario){
+    public Response update(@PathParam("id") Long id , UsuarioTO usuario){
         usuarioBO = new UsuarioBO();
         usuario.setIdUsuario(id);
         UsuarioTO resultado = usuarioBO.update(usuario);
