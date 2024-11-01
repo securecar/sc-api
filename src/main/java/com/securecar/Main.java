@@ -37,20 +37,13 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        // Carrega a variável de ambiente para identificar o ambiente de execução
-        String environment = System.getenv("ENVIRONMENT");
-        boolean isDevelopment = "development".equalsIgnoreCase(environment);
-        System.out.println("Ambiente: " + (isDevelopment ? "Desenvolvimento" : "Produção"));
-
         // Carrega variáveis de ambiente
         String dbUrl = System.getenv("DB_URL");
         String dbUsername = System.getenv("DB_USERNAME");
         String dbPassword = System.getenv("DB_PASSWORD");
         String dbDriver = System.getenv("DB_DRIVER");
-
-        // Se faltar alguma variável e estiver em desenvolvimento, carrega do .env
-        if ((dbUrl == null || dbUsername == null || dbPassword == null || dbDriver == null) && isDevelopment) {
-            System.out.println("Carregando variáveis do .env...");
+    
+        if (dbUrl == null || dbUsername == null || dbPassword == null || dbDriver == null) {
             Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
             if (dbUrl == null) {
                 dbUrl = dotenv.get("DB_URL");
@@ -61,36 +54,21 @@ public class Main {
             if (dbPassword == null) {
                 dbPassword = dotenv.get("DB_PASSWORD");
             }
-            if (dbDriver == null) {
+            if (dbDriver == null){
                 dbDriver = dotenv.get("DB_DRIVER");
             }
         }
-
-        // Verifica se todas as variáveis estão definidas
-        if (dbUrl == null || dbUsername == null || dbPassword == null || dbDriver == null) {
-            System.err.println("Erro: Variáveis de ambiente necessárias não estão definidas.");
-            System.exit(1);
-        }
-
+    
         // Define propriedades do sistema
         System.setProperty("DB_URL", dbUrl);
         System.setProperty("DB_USERNAME", dbUsername);
         System.setProperty("DB_PASSWORD", dbPassword);
         System.setProperty("DB_DRIVER", dbDriver);
-
-        // Obtém a porta do ambiente ou usa 8080 como padrão
-        String port = System.getenv("PORT");
-        if (port == null || port.isEmpty()) {
-            port = "8080";
-        }
-
-        // Atualiza BASE_URI para 0.0.0.0 e a porta obtida
-        BASE_URI = String.format("http://0.0.0.0:%s/", port);
-
+    
         // Inicia o servidor
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started at %s\nPress Ctrl+C to stop...", BASE_URI));
-
+    
         // Mantém o servidor rodando até que o processo seja interrompido
         try {
             Thread.currentThread().join();
@@ -99,3 +77,4 @@ public class Main {
         }
     }
 }
+
