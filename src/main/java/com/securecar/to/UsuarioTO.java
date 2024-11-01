@@ -1,7 +1,5 @@
 package com.securecar.to;
 
-import jakarta.json.bind.annotation.JsonbDateFormat;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
