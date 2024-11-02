@@ -16,7 +16,7 @@ public class UsuarioTO {
 
     private LocalDate dataCriacaoConta;
 
-    @CPF(message = "CPF inválido!")
+
     private String cpf;
 
     @NotEmpty(message = "Senha não pode estar vazia")
