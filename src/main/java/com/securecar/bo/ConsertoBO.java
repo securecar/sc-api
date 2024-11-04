@@ -18,6 +18,11 @@ public class ConsertoBO {
         return consertoDAO.findById(id);
     }
 
+    public ArrayList<ConsertoTO> findByIdUsuario(Long id){
+        consertoDAO = new ConsertoDAO();
+        return consertoDAO.findByIdUsuario(id);
+    }
+
     public ConsertoTO save(ConsertoTO conserto){
         consertoDAO = new ConsertoDAO();
         return consertoDAO.save(conserto);

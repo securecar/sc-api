@@ -55,6 +55,31 @@ public class ConsertoDAO extends Repository{
         }
         return null;
     }
+
+    public ArrayList<ConsertoTO> findByIdUsuario(Long id){
+        ArrayList<ConsertoTO> consertos = new ArrayList<>();
+        String sql = "select * from t_securecar_conserto where id_usuario = ?";
+        try(PreparedStatement ps = getConnection().prepareStatement(sql)){
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs != null){
+                while (rs.next()){
+                    ConsertoTO conserto = new ConsertoTO();
+                    conserto.setIdConserto(rs.getLong("id_conserto"));
+                    conserto.setDescricaoConserto(rs.getString("ds_conserto"));
+                    conserto.setValorConserto(rs.getDouble("vl_conserto"));
+                    conserto.setDataConserto(rs.getDate("dt_conserto").toLocalDate());
+                    conserto.setIdUsuario(rs.getLong("id_usuario"));
+                    consertos.add(conserto);
+                }
+            }
+        }catch (SQLException e){
+            System.out.println("Erro de sql! " + e.getMessage());
+        } finally {
+            closeConnection();
+        }
+        return consertos;
+    }
     public ConsertoTO save(ConsertoTO conserto){
         String sql = "insert into t_securecar_conserto (DT_CONSERTO, DS_CONSERTO, VL_CONSERTO, ID_USUARIO) values (?," +
                 " ?, ?, ?)";
