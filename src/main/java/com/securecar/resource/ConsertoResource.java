@@ -32,6 +32,22 @@ public class ConsertoResource {
     }
 
     @GET
+    @Path("/listar")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findByIdUsuario(@QueryParam("id_usuario") Long id_usuario){
+        consertoBO = new ConsertoBO();
+        ArrayList<ConsertoTO> resultado = consertoBO.findByIdUsuario(id_usuario);
+        Response.ResponseBuilder response = null;
+        if (resultado != null){
+            response = Response.ok();
+        }else {
+            response = Response.status(404);
+        }
+        response.entity(resultado);
+        return response.build();
+    }
+
+    @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") Long id){
