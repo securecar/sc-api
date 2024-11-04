@@ -1,8 +1,6 @@
 package com.securecar.bo;
 
-import com.securecar.dao.SeguroUnidadeDAO;
 import com.securecar.dao.UsuarioDAO;
-import com.securecar.to.UsuarioTO;
 import com.securecar.to.UsuarioTO;
 
 import java.util.ArrayList;
