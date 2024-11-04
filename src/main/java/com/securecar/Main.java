@@ -1,8 +1,10 @@
 package com.securecar;
 
+import com.securecar.resource.CorsFilter;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.jsonb.JsonBindingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import java.io.IOException;
@@ -24,6 +26,8 @@ public class Main {
         // create a resource config that scans for JAX-RS resources and providers
         // in com.securecar package
         final ResourceConfig rc = new ResourceConfig().packages("com.securecar.resource");
+        rc.register(JsonBindingFeature.class);
+        rc.register(CorsFilter.class);
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
